@@ -3,6 +3,7 @@
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.com/EriqLaplus/OZAB.svg?branch=master)](https://travis-ci.com/EriqLaplus/OZAB)
+[![Codecov test coverage](https://codecov.io/gh/EriqLaplus/OZAB/branch/master/graph/badge.svg)](https://codecov.io/gh/EriqLaplus/OZAB?branch=master)
 <!-- badges: end -->
 
 The goal of OZAB is to ...
