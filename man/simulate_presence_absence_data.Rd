@@ -7,7 +7,7 @@
 simulate_presence_absence_data(
   S = 10,
   N = 100,
-  spp_mean_presence = rnorm(S),
+  spp_mean_presence = stats::rnorm(S),
   spp_presence_correlation = rlkjcorr(1, S, eta = 1)
 )
 }
@@ -18,9 +18,7 @@ simulate_presence_absence_data(
 
 \item{spp_mean_presence}{The Gaussian latent species mean for prob. presence}
 
-\item{presence_correlation}{An S by S correlation matrix between mean presence of species}
-
-\item{detection_prob}{Detection probability can be either a single value representing detection probabilities across all species or a vector of length S containing species level detection probabilities}
+\item{spp_presence_correlation}{An S by S correlation matrix between mean presence of species}
 }
 \value{
 

@@ -3,8 +3,7 @@
 #' @param S The Number of Species
 #' @param N The Number of Plots or Sites Observed
 #' @param spp_mean_presence The Gaussian latent species mean for prob. presence
-#' @param presence_correlation An S by S correlation matrix between mean presence of species
-#' @param detection_prob Detection probability can be either a single value representing detection probabilities across all species or a vector of length S containing species level detection probabilities
+#' @param spp_presence_correlation An S by S correlation matrix between mean presence of species
 #'
 #' @return
 #' @export
@@ -15,7 +14,7 @@
 #' }
 simulate_presence_absence_data <- function(S = 10,
                                            N = 100,
-                                           spp_mean_presence = rnorm(S),
+                                           spp_mean_presence = stats::rnorm(S),
                                            spp_presence_correlation = rlkjcorr(1, S, eta = 1)) {
 
   # Input Error Checking
@@ -37,7 +36,11 @@ simulate_presence_absence_data <- function(S = 10,
   }
 
   ## Generate sample of P plots for each species from MVN with spp x spp correlation
-  latent_presence <- mvtnorm::rmvnorm(N, mean = spp_mean_presence, sigma = spp_presence_correlation)
+  latent_presence <- mvtnorm::rmvnorm(
+      N,
+      mean = spp_mean_presence,
+      sigma = spp_presence_correlation
+    )
 
   ## Generate Binary Response
   ## so this is where could add a toggle for ordinal data as a function input.
@@ -53,30 +56,36 @@ simulate_presence_absence_data <- function(S = 10,
   latent_mean_tibble <-
     rep(spp_mean_presence, N) %>%
     matrix(ncol = S, byrow = TRUE) %>%
-    as_tibble(rownames = "plotid") %>%
-    mutate(plotid = as.numeric(plotid)) %>%
-    pivot_longer(cols = -contains("plotid"), names_to = "species", values_to = "latent_mean") %>%
-    mutate(species = rep(1:S, N))
+    dplyr::as_tibble(rownames = "plotid") %>%
+    dplyr::mutate(plotid = as.numeric(plotid)) %>%
+    tidyr::pivot_longer(cols = -contains("plotid"),
+                 names_to = "species",
+                 values_to = "latent_mean") %>%
+    dplyr::mutate(species = rep(1:S, N))
 
   ### Prepare Latent Presence Realizations
   latent_presence_tibble <-
     latent_presence %>%
-    as_tibble(rownames = "plotid") %>%
-    mutate(plotid = as.numeric(plotid)) %>%
-    pivot_longer(cols = -contains("plotid"), names_to = "species", values_to = "latent_presence") %>%
-    mutate(species = rep(1:S, N))
+    dplyr::as_tibble(rownames = "plotid") %>%
+    dplyr::mutate(plotid = as.numeric(plotid)) %>%
+    tidyr::pivot_longer(
+      cols = -contains("plotid"),
+      names_to = "species",
+      values_to = "latent_presence"
+      ) %>%
+    dplyr::mutate(species = rep(1:S, N))
 
   ### Prepare True Presence Values
   presence_tibble <-
     presence_data %>%
-    as_tibble(rownames = "plotid") %>%
-    mutate(plotid = as.numeric(plotid)) %>%
-    pivot_longer(
+    dplyr::as_tibble(rownames = "plotid") %>%
+    dplyr::mutate(plotid = as.numeric(plotid)) %>%
+    tidyr::pivot_longer(
       cols = -contains("plotid"),
       names_to = "species",
       values_to = "presence"
     ) %>%
-    mutate(
+    dplyr::mutate(
       species = rep(1:S, N),
       presence = as.logical(presence)
     )
@@ -84,14 +93,14 @@ simulate_presence_absence_data <- function(S = 10,
   ### Prepare Observed Presence Values
   observation_tibble <-
     observation_data %>%
-    as_tibble(rownames = "plotid") %>%
-    mutate(plotid = as.numeric(plotid)) %>%
-    pivot_longer(
+    dplyr::as_tibble(rownames = "plotid") %>%
+    dplyr::mutate(plotid = as.numeric(plotid)) %>%
+    dplyr::pivot_longer(
       cols = -contains("plotid"),
       names_to = "species",
       values_to = "observed_presence"
     ) %>%
-    mutate(
+    dplyr::mutate(
       species = rep(1:S, N),
       observed_presence = as.logical(observed_presence)
     )
@@ -99,9 +108,9 @@ simulate_presence_absence_data <- function(S = 10,
   ### Create Combined Dataframe
   presence_df <-
     latent_mean_tibble %>%
-    full_join(latent_presence_tibble, by = c("plotid", "species")) %>%
-    full_join(presence_tibble, by = c("plotid", "species")) %>%
-    full_join(observation_tibble, by = c("plotid", "species"))
+    dplyr::full_join(latent_presence_tibble, by = c("plotid", "species")) %>%
+    dplyr::full_join(presence_tibble, by = c("plotid", "species")) %>%
+    dplyr::full_join(observation_tibble, by = c("plotid", "species"))
 
   return(list(
     presence_df = presence_df,
