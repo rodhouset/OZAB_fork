@@ -3,5 +3,12 @@
 language: R
 cache: packages
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install libv8-dev
+
+## Mac osx
+# * brew: v8 (OSX)
+
 after_success:
   - Rscript -e 'covr::codecov()'
