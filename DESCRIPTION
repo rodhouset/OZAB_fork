@@ -1,13 +1,18 @@
 Package: OZAB
-Title: What the Package Does (One Line, Title Case)
+Title: Implemtation of Ordinal Zero-Augmented Beta Models in Stan
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    c(person(given = "Jordan",
+             family = "Love",
+             role = c("aut", "cre"),
+             email = "jordanlove3@montana.edu",
+             comment = c(ORCID = "YOUR-ORCID-ID"),
+      person(given = "Kathryn",
+             family = "Irvine",
+             role = c("aut", "cre"),
+             email = "todo",
+             comment = c(ORCID = "YOUR-ORC-ID")))
+Description: The OZAB package provides simulation and fitting functions for Ordinal-Zero Augemented Beta models. All models are implemented in Stan allowing a fully Bayesian workflow. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
