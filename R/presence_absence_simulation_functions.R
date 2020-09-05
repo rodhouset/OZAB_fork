@@ -16,23 +16,23 @@
 simulate_presence_absence_data <- function(S = 10,
                                            N = 100,
                                            spp_mean_presence = rnorm(S),
-                                           spp_presence_correlation = rlkjcorr(1, S, eta = 1)){
+                                           spp_presence_correlation = rlkjcorr(1, S, eta = 1)) {
 
   # Input Error Checking
 
-  if(S < 1){
+  if (S < 1) {
     stop("The number of species, S, must be a positive integer.")
   }
 
-  if(N < 1){
+  if (N < 1) {
     stop("The number of observations, N, must be a positive integer.")
   }
 
-  if(length(spp_mean_presence) != S){
+  if (length(spp_mean_presence) != S) {
     stop("The vector of latent mean presence must match the number of species, S.")
   }
 
-  if(dim(spp_presence_correlation)[1] != dim(spp_presence_correlation)[2]){
+  if (dim(spp_presence_correlation)[1] != dim(spp_presence_correlation)[2]) {
     stop("The presence correlation matrix must be square.")
   }
 
@@ -71,22 +71,30 @@ simulate_presence_absence_data <- function(S = 10,
     presence_data %>%
     as_tibble(rownames = "plotid") %>%
     mutate(plotid = as.numeric(plotid)) %>%
-    pivot_longer(cols = -contains("plotid"),
-                 names_to = "species",
-                 values_to = "presence") %>%
-    mutate(species = rep(1:S, N),
-           presence = as.logical(presence))
+    pivot_longer(
+      cols = -contains("plotid"),
+      names_to = "species",
+      values_to = "presence"
+    ) %>%
+    mutate(
+      species = rep(1:S, N),
+      presence = as.logical(presence)
+    )
 
   ### Prepare Observed Presence Values
   observation_tibble <-
     observation_data %>%
     as_tibble(rownames = "plotid") %>%
     mutate(plotid = as.numeric(plotid)) %>%
-    pivot_longer(cols = -contains("plotid"),
-                 names_to = "species",
-                 values_to = "observed_presence") %>%
-    mutate(species = rep(1:S, N),
-           observed_presence = as.logical(observed_presence))
+    pivot_longer(
+      cols = -contains("plotid"),
+      names_to = "species",
+      values_to = "observed_presence"
+    ) %>%
+    mutate(
+      species = rep(1:S, N),
+      observed_presence = as.logical(observed_presence)
+    )
 
   ### Create Combined Dataframe
   presence_df <-
@@ -95,8 +103,10 @@ simulate_presence_absence_data <- function(S = 10,
     full_join(presence_tibble, by = c("plotid", "species")) %>%
     full_join(observation_tibble, by = c("plotid", "species"))
 
-  return(list(presence_df = presence_df,
-              spp_mean_presence  = spp_mean_presence ,
-              spp_presence_correlation =spp_presence_correlation,
-              latent_presence = latent_presence))
+  return(list(
+    presence_df = presence_df,
+    spp_mean_presence = spp_mean_presence,
+    spp_presence_correlation = spp_presence_correlation,
+    latent_presence = latent_presence
+  ))
 }
