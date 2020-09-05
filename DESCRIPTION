@@ -9,7 +9,7 @@ Authors@R:
              comment = c(ORCID = "YOUR-ORCID-ID")),
       person(given = "Kathryn",
              family = "Irvine",
-             role = c("aut", "cre"),
+             role = c("aut"),
              email = "todo",
              comment = c(ORCID = "YOUR-ORC-ID")))
 Description: The OZAB package provides simulation and fitting functions for Ordinal-Zero Augemented Beta models. All models are implemented in Stan allowing a fully Bayesian workflow. 
