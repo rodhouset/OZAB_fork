@@ -1,0 +1,326 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>National Park Service Greater Yellowstone Network</origin>
+        <pubdate>2019</pubdate>
+        <title>Multiple Observer Sagebrush Cover Class Data in Big Horn Canyon National Recreation Area , Montana  Wyoming 2015</title>
+        <geoform>tabular digital data</geoform>
+        <onlink>https://doi.org/10.5066/P99JX2ND</onlink>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>The data were collected in 2015 at Big Horn Canyon National Recreation Area. The areal plots were placed following a random selection of locations based on the GRTS algorithm</abstract>
+      <purpose>The data were collected to assess the potential impact of observation error on status and trends estimation using ordinal cover classes for plants.</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <sngdate>
+          <caldate>2015</caldate>
+        </sngdate>
+      </timeinfo>
+      <current>observed</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>None planned</update>
+    </status>
+    <spdom>
+      <descgeog>Big Horn Canyon National Recreation Area</descgeog>
+      <bounding>
+        <westbc>-108.3362</westbc>
+        <eastbc>-108.1288</eastbc>
+        <northbc>45.2062</northbc>
+        <southbc>44.7389</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>ISO 19115 Topic Category</themekt>
+        <themekey>climatologyMeteorologyAtmosphere</themekey>
+      </theme>
+      <theme>
+        <themekt>USGS Thesaurus</themekt>
+        <themekey>Land Use Change</themekey>
+        <themekey>Ecology</themekey>
+      </theme>
+      <place>
+        <placekt>Common Geographic Areas</placekt>
+        <placekey>Montana</placekey>
+	<placekey>Wyoming</placekey>
+      </place>
+      <place>
+        <placekt>Geographic Names Information System</placekt>
+        <placekey>Big Horn Canyon National Recreation Area</placekey>
+      </place>
+    </keywords>
+    <taxonomy>
+      <keywtax>
+      <taxonkt>USGS Biocomplexity</taxonkt>
+	<taxonkey>native shrub</taxonkey>
+     </keywtax>
+        <taxonkey>Artemisia tridentata</taxonkey>
+      </keywtax>
+<taxonsys>
+				<classsys>
+					<classcit>
+						<citeinfo>
+							<origin>Integrated Taxonomic Information System (ITIS)</origin>
+							<pubdate>2019</pubdate>
+							<title>Integrated Taxonomic Information System (ITIS)</title>
+							<geoform>ONLINE_REFERENCE</geoform>
+							<pubinfo>
+								<pubplace>Washington, D.C.</pubplace>
+								<publish>Integrated Taxonomic Information System (ITIS)</publish>
+							</pubinfo>
+							<onlink>http://itis.gov</onlink>
+						</citeinfo>
+					</classcit>
+				</classsys>
+				<taxonpro>expert knowledge</taxonpro>
+			</taxonsys>
+      <taxoncl>
+        <taxonrn>Kingdom</taxonrn>
+        <taxonrv>Plantae</taxonrv>
+        <taxoncl>
+          <taxonrn>Subkingdom</taxonrn>
+          <taxonrv>Viridiplantae</taxonrv>
+          <taxoncl>
+            <taxonrn>Infrakingdom</taxonrn>
+            <taxonrv>Streptophyta</taxonrv>
+            <taxoncl>
+              <taxonrn>Superdivision</taxonrn>
+              <taxonrv>Embryophyta</taxonrv>
+              <taxoncl>
+                <taxonrn>Division</taxonrn>
+                <taxonrv>Tracheophyta</taxonrv>
+                <taxoncl>
+                  <taxonrn>Subdivision</taxonrn>
+                  <taxonrv>Spermatophytina</taxonrv>
+                  <taxoncl>
+                    <taxonrn>Class</taxonrn>
+                    <taxonrv>Magnoliopsida</taxonrv>
+                    <taxoncl>
+                      <taxonrn>Superorder</taxonrn>
+                      <taxonrv>Asteranae</taxonrv>
+                      <taxoncl>
+                        <taxonrn>Order</taxonrn>
+                        <taxonrv>Asterales</taxonrv>
+                        <taxoncl>
+                          <taxonrn>Family</taxonrn>
+                          <taxonrv>Asteraceae</taxonrv>
+                          <taxoncl>
+                            <taxonrn>Genus</taxonrn>
+                            <taxonrv>Artemisia</taxonrv>
+                            <taxoncl>
+                              <taxonrn>Species</taxonrn>
+                              <taxonrv>Artemisia tridentata</taxonrv>
+                              <common>TSN: 35498</common>
+                            </taxoncl>
+                          </taxoncl>
+                        </taxoncl>
+                      </taxoncl>
+                    </taxoncl>
+                  </taxoncl>
+                </taxoncl>
+              </taxoncl>
+            </taxoncl>
+          </taxoncl>
+        </taxoncl>
+      </taxoncl>
+    </taxonomy>
+    <accconst>None.  Please see 'Distribution Info' for details.</accconst>
+    <useconst>None.  Users are advised to read the data set's metadata thoroughly to understand appropriate use and data limitations.</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntperp>
+          <cntper>Kathryn M Irvine</cntper>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntperp>
+        <cntpos>Statistician</cntpos>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>2327 University Way</address>
+          <city>Bozeman</city>
+          <state>MT</state>
+          <postal>59715</postal>
+          <country>United States</country>
+        </cntaddr>
+        <cntvoice>406-994-7492</cntvoice>
+        <cntfax>406-994-6556</cntfax>
+        <cntemail>kirvine@usgs.gov</cntemail>
+      </cntinfo>
+    </ptcontac>
+    <datacred>Erin K. Shanahan</datacred>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>No formal attribute accuracy tests were conducted.</attraccr>
+    </attracc>
+    <logic>No formal logical accuracy tests were conducted.</logic>
+    <complete>Data set is considered complete for the information presented, as described in the abstract.  Users are advised to read the rest of the metadata record carefully for additional details.</complete>
+    <lineage>
+      <procstep>
+        <procdesc>Cover class data was recorded following a modified Daubenmire scale within a 1m x 1m plot. The data were collected following the procedures and survey design published in Esposito, D. M., Shanahan, E., &amp; Rodhouse, T. J. (2016). UCBN and GRYN sagebrush steppe
+ vegetation monitoring; double observer study 2015: John Day Fossil Beds National Monument - Clarno Unit and City of Rocks National Reserve. Tech. rep. National Park  Service, Fort Collins, Colorado: Natural Resources Data Series
+ NPS/UCBN/NRDS-2016/1052.</procdesc>
+        <procdate>2015</procdate>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>Multiple Observer Sagebrush Cover Class Data in Big Horn Canyon National Recreation Area , Montana 2015.csv</enttypl>
+        <enttypd>Comma Separated Value (CSV) file containing data.</enttypd>
+        <enttypds>Producer Defined</enttypds>
+      </enttyp>
+      <attr>
+  <attrlabl>Sample_Frame</attrlabl><attrdef>ID for three different sample frame surveyed in BICA</attrdef><attrdefs>Producer Defined</attrdefs><attrdomv>
+    <edom>
+      <edomv>BICA_LTM_Veg060</edomv>
+      <edomvd>
+      </edomvd>
+      <edomvds>Producer defined</edomvds>
+    </edom>
+  </attrdomv>
+  <attrdomv>
+    <edom>
+      <edomv>BICA_LTM_Veg080</edomv>
+      <edomvd>
+      </edomvd>
+      <edomvds>Producer defined</edomvds>
+    </edom>
+  </attrdomv>
+  <attrdomv>
+    <edom>
+      <edomv>BICA_LTM_Veg090</edomv>
+      <edomvd>
+      </edomvd>
+      <edomvds>Producer defined</edomvds>
+    </edom>
+  </attrdomv>
+</attr>
+      <attr>
+        <attrlabl>Loc_Number</attrlabl>
+        <attrdef>Plot number within each frame (not unique)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>1</rdommin>
+            <rdommax>53</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+  <attrlabl>Repeat_Sample</attrlabl><attrdef>yes= multiple observers recorded 
+no= single observer recorded</attrdef><attrdefs>Producer Defined</attrdefs><attrdomv>
+    <edom>
+      <edomv>Yes</edomv>
+      <edomvd>
+      </edomvd>
+      <edomvds>Producer defined</edomvds>
+    </edom>
+  </attrdomv>
+  <attrdomv>
+    <edom>
+      <edomv>No</edomv>
+      <edomvd>
+      </edomvd>
+      <edomvds>Producer defined</edomvds>
+    </edom>
+  </attrdomv>
+</attr>
+      <attr>
+        <attrlabl>Artemisia.tridentata</attrlabl>
+        <attrdef>recorded cover class for Sagebrush</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>5</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>uni.id</attrlabl>
+        <attrdef>Unique plot ID created for modeling</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>365</rdommin>
+            <rdommax>573</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>allot</attrlabl>
+        <attrdef>Unit level id [1,2,3] corresponds to sample frame number
+used for indexing in model</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>1</rdommin>
+            <rdommax>3</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+  </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntperp>
+          <cntper>Kathryn M Irvine</cntper>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntperp>
+        <cntpos>Statistician</cntpos>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>2327 University Way</address>
+          <city>Bozeman</city>
+          <state>MT</state>
+          <postal>59715</postal>
+          <country>United States</country>
+        </cntaddr>
+        <cntvoice>406-994-7492</cntvoice>
+        <cntfax>406-994-6556</cntfax>
+        <cntemail>kirvine@usgs.gov</cntemail>
+      </cntinfo>
+    </distrib>
+    <distliab>Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty.</distliab>
+    <stdorder>
+      <digform><digtinfo>
+          <formname>Digital Data</formname>
+        </digtinfo>
+        <digtopt><onlinopt><computer><networka><networkr>https://doi.org/10.5066/P99JX2ND</networkr></networka></computer></onlinopt></digtopt></digform>
+      <fees>None</fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20190605</metd>
+    <metc>
+      <cntinfo>
+        <cntperp>
+          <cntper>Kathryn M Irvine</cntper>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntperp>
+        <cntpos>Statistician</cntpos>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>2327 University Way</address>
+          <city>Bozeman</city>
+          <state>MT</state>
+          <postal>59715</postal>
+          <country>United States</country>
+        </cntaddr>
+        <cntvoice>406-994-7492</cntvoice>
+        <cntfax>406-994-6556</cntfax>
+        <cntemail>kirvine@usgs.gov</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Biological Data Profile of the Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001.1-1999</metstdv>
+  </metainfo>
+</metadata>

@@ -1,0 +1,368 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Record created using version 2.0.5 of the USGS Metadata Wizard tool. (https://github.com/usgs/fort-pymdwizard)-->
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>National Park Service Upper Columbia Basin Network </origin>
+        <pubdate>2019</pubdate>
+        <title>Double Observer Cover Class Data in Clarno unit John Day Fossil Beds, Oregon 2015</title>
+        <geoform>tabular digital data</geoform>
+        <pubinfo>
+          <pubplace>Reston, VA</pubplace>
+          <publish>US Geological Survey</publish>
+        </pubinfo>
+        <onlink>https://doi.org/10.5066/P99JX2ND</onlink>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>The data were collected in 2015 at the Clarno unit of the John Day Fossil Beds National Monument. The areal plots were placed following a random selection of locations based on the GRTS algorithm.</abstract>
+      <purpose>The data were collected to assess the potential impact of observation error on status and trends estimation using ordinal cover classes for plants.</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <sngdate>
+          <caldate>2015</caldate>
+        </sngdate>
+      </timeinfo>
+      <current>observed</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>None planned</update>
+    </status>
+    <spdom>
+      <descgeog>John Day Fossil Beds National Monument</descgeog>
+      <bounding>
+        <westbc>-120.4400</westbc>
+        <eastbc>-119.6100</eastbc>
+        <northbc>44.9400</northbc>
+        <southbc>44.4900</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>ISO 19115 Topic Category</themekt>
+        <themekey>biota</themekey>
+      </theme>
+      <theme>
+        <themekt>USGS Thesaurus</themekt>
+        <themekey>Land Use Change</themekey>
+        <themekey>Ecology</themekey>
+      </theme>
+      <place>
+        <placekt>Common Geographic Areas</placekt>
+        <placekey>Oregon</placekey>
+      </place>
+      <place>
+        <placekt>Geographic Names Information System</placekt>
+        <placekey>John Day Fossil Beds</placekey>
+      </place>
+    </keywords>
+    <taxonomy>
+      <keywtax>
+        <taxonkt>USGS Biocomplexity</taxonkt>
+        <taxonkey>Invasive grasses</taxonkey>
+       <taxonkey>Perennial bunchgrasses</taxonkey>
+      </keywtax>
+	<taxonsys>
+				<classsys>
+					<classcit>
+						<citeinfo>
+							<origin>Integrated Taxonomic Information System (ITIS)</origin>
+							<pubdate>2019</pubdate>
+							<title>Integrated Taxonomic Information System (ITIS)</title>
+							<geoform>ONLINE_REFERENCE</geoform>
+							<pubinfo>
+								<pubplace>Washington, D.C.</pubplace>
+								<publish>Integrated Taxonomic Information System (ITIS)</publish>
+							</pubinfo>
+							<onlink>http://itis.gov</onlink>
+						</citeinfo>
+					</classcit>
+				</classsys>
+				<taxonpro>expert knowledge</taxonpro>
+			</taxonsys>
+      <taxoncl>
+        <taxonrn>Kingdom</taxonrn>
+        <taxonrv>Plantae</taxonrv>
+        <taxoncl>
+          <taxonrn>Subkingdom</taxonrn>
+          <taxonrv>Viridiplantae</taxonrv>
+          <taxoncl>
+            <taxonrn>Infrakingdom</taxonrn>
+            <taxonrv>Streptophyta</taxonrv>
+            <taxoncl>
+              <taxonrn>Superdivision</taxonrn>
+              <taxonrv>Embryophyta</taxonrv>
+              <taxoncl>
+                <taxonrn>Division</taxonrn>
+                <taxonrv>Tracheophyta</taxonrv>
+                <taxoncl>
+                  <taxonrn>Subdivision</taxonrn>
+                  <taxonrv>Spermatophytina</taxonrv>
+                  <taxoncl>
+                    <taxonrn>Class</taxonrn>
+                    <taxonrv>Magnoliopsida</taxonrv>
+                    <taxoncl>
+                      <taxonrn>Superorder</taxonrn>
+                      <taxonrv>Lilianae</taxonrv>
+                      <taxoncl>
+                        <taxonrn>Order</taxonrn>
+                        <taxonrv>Poales</taxonrv>
+                        <taxoncl>
+                          <taxonrn>Family</taxonrn>
+                          <taxonrv>Poaceae</taxonrv>
+                          <taxoncl>
+                            <taxonrn>Genus</taxonrn>
+                            <taxonrv>Bromus</taxonrv>
+                            <taxoncl>
+                              <taxonrn>Species</taxonrn>
+                              <taxonrv>Bromus tectorum</taxonrv>
+                              <common>TSN: 40524</common>
+                            </taxoncl>
+                          </taxoncl>
+                          <taxoncl>
+                            <taxonrn>Genus</taxonrn>
+                            <taxonrv>Taeniatherum</taxonrv>
+                            <taxoncl>
+                              <taxonrn>Species</taxonrn>
+                              <taxonrv>Taeniatherum caput-medusae</taxonrv>
+                            </taxoncl>
+                          </taxoncl>
+                          <taxoncl>
+                            <taxonrn>Genus</taxonrn>
+                            <taxonrv>Poa</taxonrv>
+                            <taxoncl>
+                              <taxonrn>Species</taxonrn>
+                              <taxonrv>Poa secunda</taxonrv>
+                              <common>TSN: 41103</common>
+                            </taxoncl>
+                          </taxoncl>
+                          <taxoncl>
+                            <taxonrn>Genus</taxonrn>
+                            <taxonrv>Pseudoroegneria</taxonrv>
+                            <taxoncl>
+                              <taxonrn>Species</taxonrn>
+                              <taxonrv>Pseudoroegneria spicata</taxonrv>
+                              <common>TSN: 504637</common>
+                            </taxoncl>
+                          </taxoncl>
+                        </taxoncl>
+                      </taxoncl>
+                    </taxoncl>
+                  </taxoncl>
+                </taxoncl>
+              </taxoncl>
+            </taxoncl>
+          </taxoncl>
+        </taxoncl>
+      </taxoncl>
+    </taxonomy>
+    <accconst>None.  Please see 'Distribution Info' for details.</accconst>
+    <useconst>Although these data have been processed successfully on a computer system at the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data for other purposes, nor on all computer systems, nor shall the act of distribution constitute any such warranty. The USGS or the U.S. Government shall not be held liable for improper or incorrect use of the data described and/or contained herein.</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntperp>
+          <cntper>Kathryn M Irvine</cntper>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntperp>
+        <cntpos>Statistician</cntpos>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>2327 University Way</address>
+          <city>Bozeman</city>
+          <state>MT</state>
+          <postal>59715</postal>
+          <country>United States</country>
+        </cntaddr>
+        <cntvoice>406-994-7492</cntvoice>
+        <cntfax>406-994-6556</cntfax>
+        <cntemail>kirvine@usgs.gov</cntemail>
+      </cntinfo>
+    </ptcontac>
+    <datacred>Tom Rodhouse, National Park Service</datacred>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>No formal attribute accuracy tests were conducted.</attraccr>
+    </attracc>
+    <logic>No formal logical accuracy tests were conducted.</logic>
+    <complete>Data set is considered complete for the information presented, as described in the abstract.  Users are advised to read the rest of the metadata record carefully for additional details.</complete>
+    <lineage>
+      <procstep>
+        <procdesc>Cover class data was recorded following a modified Daubenmire scale within a 1m x 1m plot. The data were collected following the procedures and survey design published in Esposito, D. M., Shanahan, E., &amp; Rodhouse, T. J. (2016). UCBN and GRYN sagebrush steppe
+ vegetation monitoring; double observer study 2015: John Day Fossil Beds National Monument - Clarno Unit and City of Rocks National Reserve. Tech. rep. National Park  Service, Fort Collins, Colorado: Natural Resources Data Series
+ NPS/UCBN/NRDS-2016/1052.</procdesc>
+        <procdate>2015</procdate>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>Double Observer Cover Class Data in Clarno unit John Day Fossil Beds, Oregon 2015.csv</enttypl>
+        <enttypd>Comma Separated Value (CSV) file containing data.</enttypd>
+        <enttypds>Producer Defined</enttypds>
+      </enttyp>
+      <attr>
+  <attrlabl>Sample_Frame</attrlabl><attrdef>Specifies JODA clarno unit </attrdef><attrdefs>Producer Defined</attrdefs><attrdomv>
+    <edom>
+      <edomv>JODA_Clarno</edomv>
+      <edomvd>
+      </edomvd>
+      <edomvds>Producer defined</edomvds>
+    </edom>
+  </attrdomv>
+</attr>
+      <attr>
+  <attrlabl>Repeat_Sample</attrlabl><attrdef>yes for multiple observers surveying at the same plot
+no for only single observer plot</attrdef><attrdefs>Producer Defined</attrdefs><attrdomv>
+    <edom>
+      <edomv>yes</edomv>
+      <edomvd>
+      </edomvd>
+      <edomvds>Producer defined</edomvds>
+    </edom>
+  </attrdomv>
+  <attrdomv>
+    <edom>
+      <edomv>no</edomv>
+      <edomvd>
+      </edomvd>
+      <edomvds>Producer defined</edomvds>
+    </edom>
+  </attrdomv>
+</attr>
+      <attr>
+        <attrlabl>Loc_Number</attrlabl>
+        <attrdef>plot number corresponds to last number appended to Loc_Name</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>1</rdommin>
+            <rdommax>220</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Loc_Name</attrlabl>
+        <attrdef>Unique name for each plot surveyed</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <udom/>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>BareGrdCover</attrlabl>
+        <attrdef>recorded cover class for Bareground</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>5</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Bromus.tectorum</attrlabl>
+        <attrdef>recorded cover class for Bromus tectorum</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>6</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Elymus.caput.medusae</attrlabl>
+        <attrdef>recorded cover class for Elymus caput-medusae</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>6</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Poa.secunda</attrlabl>
+        <attrdef>recorded cover class for Poa secunda</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>3</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Pseudoroegneria.spicata</attrlabl>
+        <attrdef>recorded cover class for Pseudoroegneria spicata</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>4</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+  </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntperp>
+          <cntper>Kathryn M Irvine</cntper>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntperp>
+        <cntpos>Statistician</cntpos>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>2327 University Way</address>
+          <city>Bozeman</city>
+          <state>MT</state>
+          <postal>59715</postal>
+          <country>United States</country>
+        </cntaddr>
+        <cntvoice>406-994-7492</cntvoice>
+        <cntfax>406-994-6556</cntfax>
+        <cntemail>kirvine@usgs.gov</cntemail>
+      </cntinfo>
+    </distrib>
+    <distliab>Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty.</distliab>
+    <stdorder>
+      <digform><digtinfo>
+          <formname>Digital Data</formname>
+        </digtinfo>
+        <digtopt><onlinopt><computer><networka><networkr>https://doi.org/10.5066/P99JX2ND</networkr></networka></computer></onlinopt></digtopt></digform>
+      <fees>None</fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20190605</metd>
+    <metc>
+      <cntinfo>
+        <cntperp>
+          <cntper>Kathryn M Irvine</cntper>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntperp>
+        <cntpos>Statistician</cntpos>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>2327 University Way</address>
+          <city>Bozeman</city>
+          <state>MT</state>
+          <postal>59715</postal>
+          <country>United States</country>
+        </cntaddr>
+        <cntvoice>406-994-7492</cntvoice>
+        <cntfax>406-994-6556</cntfax>
+        <cntemail>kirvine@usgs.gov</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Biological Data Profile of the Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001.1-1999</metstdv>
+  </metainfo>
+</metadata>
