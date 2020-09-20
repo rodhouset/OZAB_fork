@@ -13,7 +13,7 @@ The goal of OZAB is to ...
 You can install the released version of OZAB from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("OZAB")
+devtools::install_github("EriqLaplus/OZAB")
 ```
 
 ## Example
