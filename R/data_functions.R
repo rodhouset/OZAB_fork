@@ -16,7 +16,10 @@ pivot_nps_data <- function(nps_data, covariate_cols = NULL){
     cols = -c({{ covariate_cols }}),
     names_to = 'Species',
     values_to = 'Cover Class'
-    )
+    ) %>%
+    mutate(
+      `Cover Class` = forcats::fct_rev(forcats::as_factor(`Cover Class`))
+      )
 }
 
 
