@@ -8,16 +8,16 @@
 #' @param species_col Name of Species column if it differs from Default 'Species'
 #' @param cover_class_col Name of Cover Class column if it differs from Default 'Cover Class'
 #'
-#' @return
+#' @return ggplot2 object
 #' @export
 #'
 #' @examples
-plot_cover_class_by_covariate <- function(data, species, covariate, species_col = Species, cover_class_col = `Cover Class`){
+plot_cover_class_by_covariate <- function(data, species, covariate, species_col = 'Species', cover_class_col = 'Cover Class'){
   data %>%
-    filter({{ species_col }} == species) %>%
-    ggplot(aes(x = {{ covariate }}, fill = {{ cover_class_col }})) +
-      geom_bar(position = position_fill()) +
-      ylab("Empirical Proportions")
+    dplyr::filter({{ species_col }} == species) %>%
+    ggplot2::ggplot(ggplot2::aes(x = {{ covariate }}, fill = {{ cover_class_col }})) +
+      ggplot2::geom_bar(position = ggplot2::position_fill()) +
+      ggplot2::ylab("Empirical Cumulative Proportions")
 }
 
 #' Plot Cover class over space and time
@@ -31,15 +31,15 @@ plot_cover_class_by_covariate <- function(data, species, covariate, species_col 
 #' @param species_col Name of Species Column (Default: Species)
 #' @param cover_class_col Name of Cover Class Column (Default: Cover Class)
 #'
-#' @return
+#' @return ggplot2 object
 #' @export
 #'
 #' @examples
-plot_cover_class_by_time_and_location <- function(data, species, location_col = Location, datetime_col = Datetime, species_col = Species, cover_class_col = `Cover Class`){
+plot_cover_class_by_time_and_location <- function(data, species, location_col = 'Location', datetime_col = 'Datetime', species_col = 'Species', cover_class_col = 'Cover Class'){
   data %>%
-    filter({{ species_col }} == species) %>%
-    ggplot(aes(x = {{ datetime_col }}, y = {{ location_col }}, fill = {{ cover_class_col }})) +
-    geom_tile()
+    dplyr::filter({{ species_col }} == species) %>%
+    ggplot2::ggplot(ggplot2::aes(x = {{ datetime_col }}, y = {{ location_col }}, fill = {{ cover_class_col }})) +
+    ggplot2::geom_tile()
 }
 
 

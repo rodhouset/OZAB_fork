@@ -20,7 +20,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
     testthat,
-    covr
+    covr,
+    knitr,
+    rmarkdown
 Biarch: true
 Depends: 
     R (>= 3.4.0)
@@ -32,7 +34,11 @@ Imports:
     rstantools (>= 2.1.1),
     dplyr,
     mvtnorm,
-    tidyr
+    tidyr,
+    magrittr,
+    forcats,
+    modelr,
+    ggplot2
 LinkingTo: 
     BH (>= 1.66.0),
     Rcpp (>= 0.12.0),
@@ -41,3 +47,4 @@ LinkingTo:
     rstan (>= 2.18.1),
     StanHeaders (>= 2.18.0)
 SystemRequirements: GNU make
+VignetteBuilder: knitr

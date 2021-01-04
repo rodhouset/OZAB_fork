@@ -16,7 +16,7 @@ You can install the released version of OZAB from [CRAN](https://CRAN.R-project.
 install.packages("OZAB")
 ```
 
-## Example
+## Exampdle
 
 This is a basic example which shows you how to solve a common problem:
 

@@ -13,8 +13,11 @@ test_that("NPS Data Transformation Function - No Covariates", {
       test_tibble,
       dplyr::everything(),
       names_to = 'Species',
-      values_to = 'Cover Class')
+      values_to = 'Cover Class') %>%
+    dplyr::mutate(
+      `Cover Class` = forcats::fct_rev(forcats::as_factor(`Cover Class`))
     )
+  )
 })
 
 test_that("NPS Data Transformation Function - Covariates", {
@@ -35,6 +38,9 @@ test_that("NPS Data Transformation Function - Covariates", {
       test_tibble,
       -c(Year, Location, Grade),
       names_to = 'Species',
-      values_to = 'Cover Class')
+      values_to = 'Cover Class') %>%
+      dplyr::mutate(
+        `Cover Class` = forcats::fct_rev(forcats::as_factor(`Cover Class`))
+        )
   )
 })

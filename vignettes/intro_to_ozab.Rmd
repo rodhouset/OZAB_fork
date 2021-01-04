@@ -1,0 +1,57 @@
+---
+title: "intro_to_ozab"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{intro_to_ozab}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r eval=FALSE}
+library(OZAB)
+
+sagebrush
+
+sagebrush %>%
+  plot_cover_class_by_covariate('BROTEC', Fire)
+
+sagebrush %>%
+  mutate(Topo = cut(Topo, breaks = c(-0.25, -0.15, 0, 0.15, 0.25))) %>%
+  plot_cover_class_by_covariate('BROTEC', Topo)
+
+## Cheatgrass
+
+brotec_result <-
+  ozab(
+    sagebrush %>%
+      filter(Species == 'Bromus tectorum') %>%
+      mutate(
+        `Dist. to Road` = `Dist. to Road` / 100,
+        Topography2 = Topography^2),
+       `Cover Class` ~ Fire + Topography,
+       `Cover Class` ~ Topography + Topography2 + `Dist. to Road`,
+       c(0.05, 0.25, 0.5, 0.75, 0.95)
+    )
+
+## Big Sagebrush
+
+bsage_result <-
+  ozab(
+    sagebrush %>%
+      filter(Species == 'Artemisia tridentata') %>%
+      mutate(
+        `Dist. to Bound` = `Dist. to Bound` / 1000,
+         Topography2 = Topography^2
+        ),
+       `Cover Class` ~ Topography + Fire + `Dist. to Bound`,
+       `Cover Class` ~ Topography + Topography2 + Fire,
+       c(0.05, 0.25, 0.5, 0.75, 0.95)
+    )
+```
