@@ -14,6 +14,8 @@ ozab(df, presence_formula, abundance_formula, cutpoint_scheme, ...)
 \item{abundance_formula}{Formula for Specifying Abundance}
 
 \item{cutpoint_scheme}{Vector of Cutpoint Scheme Used}
+
+\item{...}{Additional Parameters to be Passed to Stan}
 }
 \value{
 Stan Object Fit

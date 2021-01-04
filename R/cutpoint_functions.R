@@ -13,8 +13,10 @@
 #' @export
 #'
 #' @examples
-#' validate_cutpoint(c(0.5)) # Okay
-#' validate_cutpoint(c(0.6, 0.4)) # Not Okay
+#' \dontrun{
+#' validate_cutpoint(c(0.5)) # Okay - Remains Silent
+#' validate_cutpoint(c(0.6, 0.4)) # Not Okay - Stops with an Error
+#' }
 validate_cutpoint <- function(cutpoint_vector){
   if(length(cutpoint_vector) == 0){
     stop("Cutpoint Vector Must Contain At Least One Value")

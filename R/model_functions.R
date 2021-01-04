@@ -4,6 +4,7 @@
 #' @param presence_formula Formula for Specifying Presence / Absence
 #' @param abundance_formula Formula for Specifying Abundance
 #' @param cutpoint_scheme Vector of Cutpoint Scheme Used
+#' @param ... Additional Parameters to be Passed to Stan
 #'
 #' @return Stan Object Fit
 #' @export
