@@ -14,8 +14,6 @@ validate_cutpoint(cutpoint_vector)
 }
 \description{
 Ensures cutpoint values are:
-}
-\details{
 \itemize{
 \item Strictly Greater Than Zero
 \item Strictly Less Than One

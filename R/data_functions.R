@@ -22,4 +22,17 @@ pivot_nps_data <- function(nps_data, covariate_cols = NULL){
       )
 }
 
-
+#' Add Presence Column
+#'
+#' @param df Tibble containing Cover Class Data
+#' @param cover_class_col Column Name for Cover Class Data
+#' @param absence_value Value for Absence -- Assumed to be Zero
+#'
+#' @return
+#' @export
+#'
+#' @examples
+add_presence <- function(df, cover_class_col, absence_value = 0){
+  df %>%
+    dplyr::mutate(Presence = ifelse({{ cover_class_col }} == absence_value, FALSE, TRUE))
+}

@@ -12,9 +12,13 @@
 #' @examples
 ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, ...){
 
+  ## Get Names
+  presence_vector_name <- all.vars(presence_formula)[1]
+  abundance_vector_name <- all.vars(abundance_formula)[1]
+
   ## Data Composition
-  cover_class_vector <- df[all.vars(presence_formula)[1]][[1]] ## Known bug, make the response index dynamic not fixed
-  N <- length(cover_class_vector)
+  y <- df[[presence_vector_name]] * df[[abundance_vector_name]]
+  N <- length(y)
   presence_matrix <- as.matrix(modelr::model_matrix(df, presence_formula))
   Kp <- ncol(presence_matrix)
   abundance_matrix <- as.matrix(modelr::model_matrix(df, abundance_formula))
@@ -26,14 +30,14 @@ ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, ...){
     N = N,
     K = K,
     c = c,
-    y = cover_class_vector,
+    y = y,
     Kp = Kp,
     Xp = presence_matrix,
     Ka = Ka,
     Xa = abundance_matrix
   )
 
-  result <- rstan::sampling(stanmodels$OZAB, data = data, chains = 1)
+  result <- rstan::sampling(stanmodels$OZAB, data = data, ...)
 
   return(result)
 }

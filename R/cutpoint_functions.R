@@ -1,7 +1,6 @@
 #' Validate a Cutpoint Vector / Scheme
 #'
 #' Ensures cutpoint values are:
-#'
 #'   * Strictly Greater Than Zero
 #'   * Strictly Less Than One
 #'   * Distinct
