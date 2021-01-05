@@ -18,17 +18,23 @@ knitr::opts_chunk$set(
 library(OZAB)
 library(tidyverse)
 
+## Examine Provided Dataset
 sagebrush
 
+## Exploratory Plots
+
+### Categorical Variable
 sagebrush %>%
-  plot_cover_class_by_covariate('BROTEC', Fire)
+  plot_cover_class_by_covariate('Artemisia tridentata', Fire)
 
+### Continuous Variable
 sagebrush %>%
-  mutate(Topo = cut(Topo, breaks = c(-0.25, -0.15, 0, 0.15, 0.25))) %>%
-  plot_cover_class_by_covariate('BROTEC', Topo)
+  mutate(Topography = cut(Topography, breaks = c(-0.25, -0.15, 0, 0.15, 0.25))) %>%
+  plot_cover_class_by_covariate('Artemisia tridentata', Topography)
 
-## Big Sagebrush
+## Big Sagebrush Analysis
 
+### Filter Dataset, Add Presence Indicator, and Transform Covariates
 sagebrush2 <-
   sagebrush %>%
     filter(Species == 'Artemisia tridentata') %>%
@@ -38,6 +44,7 @@ sagebrush2 <-
        Topography2 = Topography^2
       )
 
+### Run Model
 bsage_result <-
   ozab(
     sagebrush2,

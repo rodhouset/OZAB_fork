@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-plot_cover_class_by_covariate <- function(data, species, covariate, species_col = 'Species', cover_class_col = 'Cover Class'){
+plot_cover_class_by_covariate <- function(data, species, covariate, species_col = Species, cover_class_col = `Cover Class`){
   data %>%
     dplyr::filter({{ species_col }} == species) %>%
     ggplot2::ggplot(ggplot2::aes(x = {{ covariate }}, fill = {{ cover_class_col }})) +
