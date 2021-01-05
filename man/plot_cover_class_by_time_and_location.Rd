@@ -7,10 +7,10 @@
 plot_cover_class_by_time_and_location(
   data,
   species,
-  location_col = "Location",
-  datetime_col = "Datetime",
-  species_col = "Species",
-  cover_class_col = "Cover Class"
+  datetime_col,
+  location_col,
+  species_col = .data$Species,
+  cover_class_col = .data$`Cover Class`
 )
 }
 \arguments{
@@ -18,9 +18,9 @@ plot_cover_class_by_time_and_location(
 
 \item{species}{Name of Species to Plot}
 
-\item{location_col}{Name of Location Column (Default: Location)}
-
 \item{datetime_col}{Name of Datetime Column (Default: Datetime)}
+
+\item{location_col}{Name of Location Column (Default: Location)}
 
 \item{species_col}{Name of Species Column (Default: Species)}
 

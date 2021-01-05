@@ -4,7 +4,7 @@
 \alias{add_presence}
 \title{Add Presence Column}
 \usage{
-add_presence(df, cover_class_col, absence_value = 0)
+add_presence(df, cover_class_col = .data$`Cover Class`, absence_value = 0)
 }
 \arguments{
 \item{df}{Tibble containing Cover Class Data}

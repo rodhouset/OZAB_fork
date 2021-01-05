@@ -14,6 +14,11 @@
 #' @examples
 #' @importFrom rlang .data
 plot_cover_class_by_covariate <- function(data, species, covariate, species_col = .data$Species, cover_class_col = .data$`Cover Class`){
+
+  if(nrow(dplyr::filter(data, {{ species_col }} == species)) == 0){
+    stop('Species Not Found')
+  }
+
   data %>%
     dplyr::filter({{ species_col }} == species) %>%
     ggplot2::ggplot(ggplot2::aes(x = {{ covariate }}, fill = {{ cover_class_col }})) +
@@ -36,7 +41,13 @@ plot_cover_class_by_covariate <- function(data, species, covariate, species_col 
 #' @export
 #'
 #' @examples
-plot_cover_class_by_time_and_location <- function(data, species, location_col = 'Location', datetime_col = 'Datetime', species_col = 'Species', cover_class_col = 'Cover Class'){
+#' @importFrom rlang .data
+plot_cover_class_by_time_and_location <- function(data, species, datetime_col, location_col, species_col = .data$Species, cover_class_col = .data$`Cover Class`){
+
+  if(nrow(dplyr::filter(data, {{ species_col }} == species)) == 0){
+    stop('Species not found')
+  }
+
   data %>%
     dplyr::filter({{ species_col }} == species) %>%
     ggplot2::ggplot(ggplot2::aes(x = {{ datetime_col }}, y = {{ location_col }}, fill = {{ cover_class_col }})) +
