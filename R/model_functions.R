@@ -17,7 +17,7 @@ ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, ...){
   abundance_vector_name <- all.vars(abundance_formula)[1]
 
   ## Data Composition
-  y <- df[[presence_vector_name]] * df[[abundance_vector_name]]
+  y <- as.numeric(df[[presence_vector_name]]) * as.numeric(df[[abundance_vector_name]])
   N <- length(y)
   presence_matrix <- as.matrix(modelr::model_matrix(df, presence_formula))
   Kp <- ncol(presence_matrix)
