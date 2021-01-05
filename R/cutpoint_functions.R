@@ -8,7 +8,7 @@
 #'
 #' @param cutpoint_vector A Vector of Decimal Cutpoints Bounded Between 0 and 1
 #'
-#' @return
+#' @return Error if conditions are not met; otherwise silent
 #' @export
 #'
 #' @examples

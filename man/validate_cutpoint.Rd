@@ -10,7 +10,7 @@ validate_cutpoint(cutpoint_vector)
 \item{cutpoint_vector}{A Vector of Decimal Cutpoints Bounded Between 0 and 1}
 }
 \value{
-
+Error if conditions are not met; otherwise silent
 }
 \description{
 Ensures cutpoint values are:

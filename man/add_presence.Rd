@@ -14,7 +14,7 @@ add_presence(df, cover_class_col, absence_value = 0)
 \item{absence_value}{Value for Absence -- Assumed to be Zero}
 }
 \value{
-
+Provided tibble with column of logicals indicating presence / absence appended
 }
 \description{
 Add Presence Column

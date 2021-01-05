@@ -29,7 +29,7 @@ pivot_nps_data <- function(nps_data, covariate_cols = NULL){
 #' @param cover_class_col Column Name for Cover Class Data
 #' @param absence_value Value for Absence -- Assumed to be Zero
 #'
-#' @return
+#' @return Provided tibble with column of logicals indicating presence / absence appended
 #' @export
 #'
 #' @examples
