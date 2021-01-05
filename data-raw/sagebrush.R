@@ -14,6 +14,7 @@ sagebrush <-
     `Dist. to Bound` = D_BOUND
   ) %>%
   tidyr::pivot_longer(cols = c(`Bromus tectorum`, `Artemisia tridentata`), names_to = 'Species', values_to = 'Cover Class') %>%
-  select(Species, `Cover Class`, Fire, Topography, `Dist. to Road`, `Dist. to Bound`)
+  select(Species, `Cover Class`, Fire, Topography, `Dist. to Road`, `Dist. to Bound`) %>%
+  mutate(`Cover Class` = fct_rev(as_factor(`Cover Class`)))
 
 usethis::use_data(sagebrush, overwrite = TRUE)
