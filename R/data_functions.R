@@ -33,7 +33,8 @@ pivot_nps_data <- function(nps_data, covariate_cols = NULL){
 #' @export
 #'
 #' @examples
-add_presence <- function(df, cover_class_col, absence_value = 0){
+#' @importFrom rlang .data
+add_presence <- function(df, cover_class_col = .data$`Cover Class`, absence_value = 0){
   df %>%
     dplyr::mutate(Presence = ifelse({{ cover_class_col }} == absence_value, FALSE, TRUE))
 }

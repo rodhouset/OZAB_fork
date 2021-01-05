@@ -44,3 +44,36 @@ test_that("NPS Data Transformation Function - Covariates", {
         )
   )
 })
+
+test_that("Add Prescence Works", {
+  ## Default Naming Works
+
+  test_tibble <-
+    dplyr::tibble(
+      Species = c(1, 2, 3),
+      `Cover Class` = forcats::as_factor(c(0, 1, 2))
+    )
+
+  expect_equal(
+    add_presence(test_tibble),
+    test_tibble %>% dplyr::mutate(`Presence` = c(FALSE, TRUE, TRUE))
+  )
+
+  ## Alternative Absence Indicator Value Works
+
+  expect_equal(
+    add_presence(test_tibble, absence_value = 1),
+    test_tibble %>% dplyr::mutate(`Presence` = c(TRUE, FALSE, TRUE))
+  )
+
+  ## Alternative Cover Class Column Name Works
+
+  test_tibble2 <-
+    test_tibble %>%
+    dplyr::mutate(cover_class = `Cover Class`)
+
+  expect_equal(
+    add_presence(test_tibble2, cover_class_col = cover_class),
+    test_tibble2 %>% dplyr::mutate(`Presence` = c(FALSE, TRUE, TRUE))
+  )
+})
