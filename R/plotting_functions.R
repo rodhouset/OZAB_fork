@@ -1,4 +1,4 @@
-#' Plot Empirical Proportions of Species by Covariate Bins
+#' Plot Cumulative Empirical Proportions of Species by Covariate Bins
 #'
 #' First found in Irvine, Rodhouse, Keren 2016
 #'
@@ -12,7 +12,8 @@
 #' @export
 #'
 #' @examples
-plot_cover_class_by_covariate <- function(data, species, covariate, species_col = Species, cover_class_col = `Cover Class`){
+#' @importFrom rlang .data
+plot_cover_class_by_covariate <- function(data, species, covariate, species_col = .data$Species, cover_class_col = .data$`Cover Class`){
   data %>%
     dplyr::filter({{ species_col }} == species) %>%
     ggplot2::ggplot(ggplot2::aes(x = {{ covariate }}, fill = {{ cover_class_col }})) +

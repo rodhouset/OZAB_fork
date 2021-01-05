@@ -2,14 +2,14 @@
 % Please edit documentation in R/plotting_functions.R
 \name{plot_cover_class_by_covariate}
 \alias{plot_cover_class_by_covariate}
-\title{Plot Empirical Proportions of Species by Covariate Bins}
+\title{Plot Cumulative Empirical Proportions of Species by Covariate Bins}
 \usage{
 plot_cover_class_by_covariate(
   data,
   species,
   covariate,
-  species_col = "Species",
-  cover_class_col = "Cover Class"
+  species_col = .data$Species,
+  cover_class_col = .data$`Cover Class`
 )
 }
 \arguments{

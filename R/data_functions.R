@@ -10,15 +10,16 @@
 #' \dontrun{
 #'   pivot_nps_data(nps_data_ex, c(Year, Loc_Name, SCOSA))
 #' }
+#' @importFrom rlang .data
 pivot_nps_data <- function(nps_data, covariate_cols = NULL){
   tidyr::pivot_longer(
-    data = nps_data,
-    cols = -c({{ covariate_cols }}),
-    names_to = 'Species',
-    values_to = 'Cover Class'
+      data = nps_data,
+      cols = -c({{ covariate_cols }}),
+      names_to = 'Species',
+      values_to = 'Cover Class'
     ) %>%
     dplyr::mutate(
-      `Cover Class` = forcats::fct_rev(forcats::as_factor(`Cover Class`))
+      `Cover Class` = forcats::fct_rev(forcats::as_factor(.data$`Cover Class`))
       )
 }
 
