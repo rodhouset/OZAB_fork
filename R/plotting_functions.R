@@ -54,5 +54,25 @@ plot_cover_class_by_time_and_location <- function(data, species, datetime_col, l
     ggplot2::geom_tile()
 }
 
+alluvial_plot <- function(.data, covariate, cover_class_col = .data$`Cover Class`){
+  ## Known Bugs:
+  ##  1. cover class column name needs to be generalizable
+  ##  2. find a replacement for rlang::as_stirng(rlang::enym(.))
+  ##  3. generalize function to arbitrarily many variables
+  ##  4. add variables for widths
+  ##  5. add variables for y-axis name (or remove custom naming)
+  ##  6. add stratum names
 
+  ## Add Tests For:
+  ## 1. covariate not provided
+  ## 2. covariate not found
+  ## 3. covariate is not discrete
 
+  .data %>%
+    dplyr::group_by({{ cover_class_col }}, {{ covariate }}) %>%
+    dplyr::tally(name = 'Freq') %>%
+    ggplot2::ggplot(ggplot2::aes(y = Freq, axis1 = {{ cover_class_col }}, axis2 = {{ covariate }})) +
+    ggalluvial::geom_alluvium(ggplot2::aes(fill = {{ cover_class_col }}), width = 1/12) +
+    ggalluvial::geom_stratum(width = 1/8) +
+    ggplot2::scale_x_discrete(limits = c('Cover Class', rlang::as_string(rlang::ensym(covariate))), expand = c(.05, .05))
+}
