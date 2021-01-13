@@ -54,25 +54,47 @@ plot_cover_class_by_time_and_location <- function(data, species, datetime_col, l
     ggplot2::geom_tile()
 }
 
-alluvial_plot <- function(.data, covariate, cover_class_col = .data$`Cover Class`){
-  ## Known Bugs:
-  ##  1. cover class column name needs to be generalizable
-  ##  2. find a replacement for rlang::as_stirng(rlang::enym(.))
-  ##  3. generalize function to arbitrarily many variables
-  ##  4. add variables for widths
-  ##  5. add variables for y-axis name (or remove custom naming)
-  ##  6. add stratum names
+#' Basic Alluvial Plots for Long Format Dataframes
+#'
+#' @param .data Dataframe from which the alluvial plot will be constructed
+#' @param ... Columns for the Alluvial Plot in Order; The first column will be used as the fill color
+#' @param alluvium_width Width of the alluvium
+#' @param stratum_width Width of the stratum
+#'
+#' @return ggplot2 object
+#' @export
+#'
+#' @examples
+#' sagebrush %>%
+#'   alluvial_plot(`Cover Class`, Fire)
+alluvial_plot <- function(.data, ..., alluvium_width = 1/12, stratum_width = 1/8){
 
-  ## Add Tests For:
-  ## 1. covariate not provided
-  ## 2. covariate not found
-  ## 3. covariate is not discrete
+  columns <- rlang::enquos(...)
+
+  non_null_args <- length(columns)
+
+  # Check if covariates were provided
+  if(non_null_args == 0){
+    stop('No Covariates Provided')
+  }
+
+  # Check if columns are found in the df
+  for(col in columns){
+    if(!(rlang::quo_name(col) %in% names(.data))){
+      stop(glue::glue('{ rlang::quo_name(col) } not found in provided data'))
+    }
+  }
+
+  for(i in (length(columns) + 1):4){
+    columns[[i]] <- rlang::quo(NULL)
+  }
 
   .data %>%
-    dplyr::group_by({{ cover_class_col }}, {{ covariate }}) %>%
-    dplyr::tally(name = 'Freq') %>%
-    ggplot2::ggplot(ggplot2::aes(y = Freq, axis1 = {{ cover_class_col }}, axis2 = {{ covariate }})) +
-    ggalluvial::geom_alluvium(ggplot2::aes(fill = {{ cover_class_col }}), width = 1/12) +
-    ggalluvial::geom_stratum(width = 1/8) +
-    ggplot2::scale_x_discrete(limits = c('Cover Class', rlang::as_string(rlang::ensym(covariate))), expand = c(.05, .05))
+    dplyr::group_by(!!! columns) %>%
+    dplyr::tally() %>%
+    ggplot2::ggplot(ggplot2::aes(y = n, axis1 = !! columns[[1]], axis2 = !! columns[[2]], axis3 = !! columns[[3]], axis4 = !! columns[[4]] )) +
+      ggalluvial::geom_alluvium(ggplot2::aes(fill = !! columns[[1]]), width = alluvium_width) +
+      ggalluvial::geom_stratum(width = stratum_width) +
+      ggplot2::geom_label(stat = ggalluvial::StatStratum, ggplot2::aes(label = ggplot2::after_stat(stratum))) +
+      ggplot2::scale_x_discrete(limits = sapply(columns[1:non_null_args], rlang::quo_name), expand = c(.05, .05))
 }

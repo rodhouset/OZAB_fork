@@ -2,6 +2,7 @@
 
 export("%>%")
 export(add_presence)
+export(alluvial_plot)
 export(braun_blanquet)
 export(daubenmire)
 export(domin)
