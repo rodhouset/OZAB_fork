@@ -4,13 +4,14 @@
 #' @param presence_formula Formula for Specifying Presence / Absence
 #' @param abundance_formula Formula for Specifying Abundance
 #' @param cutpoint_scheme Vector of Cutpoint Scheme Used
+#' @param link_function Link Function to Use; Options are logit and probit; Defaults to logit
 #' @param ... Additional Parameters to be Passed to Stan
 #'
 #' @return Stan Object Fit
 #' @export
 #'
 #' @examples
-ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, ...){
+ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, link_function = 'logit', ...){
 
   ## Get Names
   presence_vector_name <- all.vars(presence_formula)[1]
@@ -37,7 +38,13 @@ ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, ...){
     Xa = abundance_matrix
   )
 
-  result <- rstan::sampling(stanmodels$OZAB, data = data, ...)
+  if(link_function == 'logit'){
+    result <- rstan::sampling(stanmodels$OZAB_model_logit, data = data, ...)
+  } else if(link_function == 'probit'){
+    result <- rstan::sampling(stanmodels$OZAB_model_probit, data = data, ...)
+  } else {
+    stop('Supported link functions are "logit" and "probit"')
+  }
 
   return(result)
 }
