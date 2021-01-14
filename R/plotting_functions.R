@@ -54,7 +54,6 @@ plot_cover_class_by_time_and_location <- function(data, species, datetime_col, l
     ggplot2::geom_tile()
 }
 
-<<<<<<< HEAD
 #' Basic Alluvial Plots for Long Format Dataframes
 #'
 #' @param .data Dataframe from which the alluvial plot will be constructed
@@ -80,7 +79,7 @@ alluvial_plot <- function(.data, ..., alluvium_width = 1/12, stratum_width = 1/8
   }
 
   # Check if columns are found in the df
-  for(col in covariates){
+  for(col in columns){
     if(!(rlang::quo_name(col) %in% names(.data))){
       stop(glue::glue('{ rlang::quo_name(col) } not found in provided data'))
     }
