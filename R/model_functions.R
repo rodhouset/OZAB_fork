@@ -13,30 +13,7 @@
 #' @examples
 ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, link_function = 'logit', ...){
 
-  ## Get Names
-  presence_vector_name <- all.vars(presence_formula)[1]
-  abundance_vector_name <- all.vars(abundance_formula)[1]
-
-  ## Data Composition
-  y <- as.numeric(df[[presence_vector_name]]) * as.numeric(df[[abundance_vector_name]])
-  N <- length(y)
-  presence_matrix <- as.matrix(modelr::model_matrix(df, presence_formula))
-  Kp <- ncol(presence_matrix)
-  abundance_matrix <- as.matrix(modelr::model_matrix(df, abundance_formula))
-  Ka <- ncol(abundance_matrix)
-  c <- cutpoint_scheme
-  K <- length(c) + 1
-
-  data <- list(
-    N = N,
-    K = K,
-    c = c,
-    y = y,
-    Kp = Kp,
-    Xp = presence_matrix,
-    Ka = Ka,
-    Xa = abundance_matrix
-  )
+  data <- compose_ozab_data(df, presence_formula = presence_formula, abundance_formula = abundance_formula, cutpoint_scheme = cutpoint_scheme)
 
   if(link_function == 'logit'){
     result <- rstan::sampling(stanmodels$OZAB_model_logit, data = data, ...)
@@ -45,6 +22,23 @@ ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, link_
   } else {
     stop('Supported link functions are "logit" and "probit"')
   }
+
+  ## Reconstruct names
+  presence_names <- attr(terms(presence_formula), 'term.labels')
+  if(attr(terms(presence_formula), 'intercept')){
+    presence_names <- c('intercept', presence_names)
+  }
+  presence_names <- paste0('presence_', presence_names)
+
+  result@sim$fnames_oi[1:data$Kp] <- presence_names
+
+  abundance_names <- attr(terms(abundance_formula), 'term.labels')
+  if(attr(terms(abundance_formula), 'intercept')){
+    abundance_names <- c('intercept', abundance_names)
+  }
+  abundance_names <- paste0('abundance_', abundance_names)
+
+  result@sim$fnames_oi[(data$Kp + 1):(data$Kp + data$Ka)] <- abundance_names
 
   return(result)
 }

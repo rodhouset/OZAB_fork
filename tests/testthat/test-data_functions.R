@@ -77,3 +77,38 @@ test_that("Add Prescence Works", {
     test_tibble2 %>% dplyr::mutate(`Presence` = c(FALSE, TRUE, TRUE))
   )
 })
+
+test_that('Data Composition Works', {
+  test_tibble <-
+    dplyr::tibble(
+      Species = c(1, 2, 3),
+      `Cover Class` = forcats::as_factor(c(0, 1, 2))
+    ) %>%
+    add_presence()
+
+  ## Presence Column Must Match Response
+  expect_error({
+    compose_ozab_data(test_tibble,
+                      `Not Presence` ~ 1,
+                      `Abundance` ~ 1
+                      )
+  })
+
+  ## Abundance Column Must Match Response
+  expect_error({
+    compose_ozab_data(
+      test_tibble,
+      `Presence` ~ 1,
+      `Not Abundance` ~ 1
+     )
+  })
+
+  ## Presence and Abundance Columns cannot be the same
+  expect_error({
+    compose_ozab_data(
+      test_tibble,
+      `Abundance` ~ 1,
+      `Abundance` ~ 1
+    )
+  })
+})

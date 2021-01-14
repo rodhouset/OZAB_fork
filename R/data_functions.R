@@ -38,3 +38,50 @@ add_presence <- function(df, cover_class_col = .data$`Cover Class`, absence_valu
   df %>%
     dplyr::mutate(Presence = ifelse({{ cover_class_col }} == absence_value, FALSE, TRUE))
 }
+
+compose_ozab_data <- function(df, presence_formula, abundance_formula, cutpoint_scheme){
+
+  ## Check if response of presence_formula is in dataframe
+
+  presence_response_col <- all.vars(presence_formula)[1]
+  if(!(presence_response_col %in% names(df))){
+    stop(glue::glue('Response of presence-absence formula, { presence_response_col }, not found in provided data'))
+  }
+
+  ## Check if response of abundance_formula is in dataframe
+
+  abundance_response_col <- all.vars(abundance_formula)[1]
+  if(!(abundance_response_col %in% names(df))){
+    stop(glue::glue('Response of abundance formula, { abundance_response_col }, not found in provided data'))
+  }
+
+  ## Make sure a single column is not response for both abundance and presence formula
+
+  if(presence_response_col == abundance_response_col){
+    stop('Response columns of abundance and presence-absence cannot be identical')
+  }
+
+  ## Make sure presence_column only has two levels
+  ## TODO
+
+  ## Data Composition
+  y <- as.numeric(df[[presence_response_col]]) * as.numeric(df[[abundance_response_col]])
+  N <- length(y)
+  presence_matrix <- as.matrix(modelr::model_matrix(df, presence_formula))
+  Kp <- ncol(presence_matrix)
+  abundance_matrix <- as.matrix(modelr::model_matrix(df, abundance_formula))
+  Ka <- ncol(abundance_matrix)
+  c <- cutpoint_scheme
+  K <- length(c) + 1
+
+  list(
+    N = N,
+    K = K,
+    c = c,
+    y = y,
+    Kp = Kp,
+    Xp = presence_matrix,
+    Ka = Ka,
+    Xa = abundance_matrix
+  )
+}
