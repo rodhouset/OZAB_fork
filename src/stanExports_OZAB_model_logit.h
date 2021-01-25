@@ -33,7 +33,7 @@ static int current_statement_begin__;
 stan::io::program_reader prog_reader__() {
     stan::io::program_reader reader;
     reader.add_event(0, 0, "start", "model_OZAB_model_logit");
-    reader.add_event(67, 65, "end", "model_OZAB_model_logit");
+    reader.add_event(71, 69, "end", "model_OZAB_model_logit");
     return reader;
 }
 template <typename T0__, typename T1__, typename T2__>
@@ -175,6 +175,10 @@ private:
         int Ka;
         matrix_d Xa;
         matrix_d Xp;
+        std::vector<double> prior_presence_mean;
+        std::vector<double> prior_abundance_mean;
+        std::vector<double> prior_presence_var;
+        std::vector<double> prior_abundance_var;
 public:
     model_OZAB_model_logit(stan::io::var_context& context__,
         std::ostream* pstream__ = 0)
@@ -287,19 +291,67 @@ public:
                     Xp(j_1__, j_2__) = vals_r__[pos__++];
                 }
             }
+            current_statement_begin__ = 45;
+            validate_non_negative_index("prior_presence_mean", "Kp", Kp);
+            context__.validate_dims("data initialization", "prior_presence_mean", "double", context__.to_vec(Kp));
+            prior_presence_mean = std::vector<double>(Kp, double(0));
+            vals_r__ = context__.vals_r("prior_presence_mean");
+            pos__ = 0;
+            size_t prior_presence_mean_k_0_max__ = Kp;
+            for (size_t k_0__ = 0; k_0__ < prior_presence_mean_k_0_max__; ++k_0__) {
+                prior_presence_mean[k_0__] = vals_r__[pos__++];
+            }
+            current_statement_begin__ = 46;
+            validate_non_negative_index("prior_abundance_mean", "Ka", Ka);
+            context__.validate_dims("data initialization", "prior_abundance_mean", "double", context__.to_vec(Ka));
+            prior_abundance_mean = std::vector<double>(Ka, double(0));
+            vals_r__ = context__.vals_r("prior_abundance_mean");
+            pos__ = 0;
+            size_t prior_abundance_mean_k_0_max__ = Ka;
+            for (size_t k_0__ = 0; k_0__ < prior_abundance_mean_k_0_max__; ++k_0__) {
+                prior_abundance_mean[k_0__] = vals_r__[pos__++];
+            }
+            current_statement_begin__ = 47;
+            validate_non_negative_index("prior_presence_var", "Kp", Kp);
+            context__.validate_dims("data initialization", "prior_presence_var", "double", context__.to_vec(Kp));
+            prior_presence_var = std::vector<double>(Kp, double(0));
+            vals_r__ = context__.vals_r("prior_presence_var");
+            pos__ = 0;
+            size_t prior_presence_var_k_0_max__ = Kp;
+            for (size_t k_0__ = 0; k_0__ < prior_presence_var_k_0_max__; ++k_0__) {
+                prior_presence_var[k_0__] = vals_r__[pos__++];
+            }
+            size_t prior_presence_var_i_0_max__ = Kp;
+            for (size_t i_0__ = 0; i_0__ < prior_presence_var_i_0_max__; ++i_0__) {
+                check_greater_or_equal(function__, "prior_presence_var[i_0__]", prior_presence_var[i_0__], 0);
+            }
+            current_statement_begin__ = 48;
+            validate_non_negative_index("prior_abundance_var", "Ka", Ka);
+            context__.validate_dims("data initialization", "prior_abundance_var", "double", context__.to_vec(Ka));
+            prior_abundance_var = std::vector<double>(Ka, double(0));
+            vals_r__ = context__.vals_r("prior_abundance_var");
+            pos__ = 0;
+            size_t prior_abundance_var_k_0_max__ = Ka;
+            for (size_t k_0__ = 0; k_0__ < prior_abundance_var_k_0_max__; ++k_0__) {
+                prior_abundance_var[k_0__] = vals_r__[pos__++];
+            }
+            size_t prior_abundance_var_i_0_max__ = Ka;
+            for (size_t i_0__ = 0; i_0__ < prior_abundance_var_i_0_max__; ++i_0__) {
+                check_greater_or_equal(function__, "prior_abundance_var[i_0__]", prior_abundance_var[i_0__], 0);
+            }
             // initialize transformed data variables
             // execute transformed data statements
             // validate transformed data
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 48;
+            current_statement_begin__ = 52;
             validate_non_negative_index("mu_beta", "Ka", Ka);
             num_params_r__ += Ka;
-            current_statement_begin__ = 49;
+            current_statement_begin__ = 53;
             validate_non_negative_index("theta_beta", "Kp", Kp);
             num_params_r__ += Kp;
-            current_statement_begin__ = 50;
+            current_statement_begin__ = 54;
             num_params_r__ += 1;
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -318,7 +370,7 @@ public:
         (void) pos__; // dummy call to supress warning
         std::vector<double> vals_r__;
         std::vector<int> vals_i__;
-        current_statement_begin__ = 48;
+        current_statement_begin__ = 52;
         if (!(context__.contains_r("mu_beta")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable mu_beta missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("mu_beta");
@@ -335,7 +387,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable mu_beta: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 49;
+        current_statement_begin__ = 53;
         if (!(context__.contains_r("theta_beta")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable theta_beta missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("theta_beta");
@@ -352,7 +404,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable theta_beta: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 50;
+        current_statement_begin__ = 54;
         if (!(context__.contains_r("phi")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable phi missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("phi");
@@ -390,21 +442,21 @@ public:
         try {
             stan::io::reader<local_scalar_t__> in__(params_r__, params_i__);
             // model parameters
-            current_statement_begin__ = 48;
+            current_statement_begin__ = 52;
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> mu_beta;
             (void) mu_beta;  // dummy to suppress unused var warning
             if (jacobian__)
                 mu_beta = in__.vector_constrain(Ka, lp__);
             else
                 mu_beta = in__.vector_constrain(Ka);
-            current_statement_begin__ = 49;
+            current_statement_begin__ = 53;
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> theta_beta;
             (void) theta_beta;  // dummy to suppress unused var warning
             if (jacobian__)
                 theta_beta = in__.vector_constrain(Kp, lp__);
             else
                 theta_beta = in__.vector_constrain(Kp);
-            current_statement_begin__ = 50;
+            current_statement_begin__ = 54;
             local_scalar_t__ phi;
             (void) phi;  // dummy to suppress unused var warning
             if (jacobian__)
@@ -412,11 +464,11 @@ public:
             else
                 phi = in__.scalar_lb_constrain(0);
             // model body
-            current_statement_begin__ = 60;
-            lp_accum__.add(normal_log<propto__>(mu_beta, 0, 100));
-            current_statement_begin__ = 61;
-            lp_accum__.add(normal_log<propto__>(theta_beta, 0, 100));
             current_statement_begin__ = 64;
+            lp_accum__.add(normal_log<propto__>(mu_beta, prior_abundance_mean, prior_abundance_var));
+            current_statement_begin__ = 65;
+            lp_accum__.add(normal_log<propto__>(theta_beta, prior_presence_mean, prior_presence_var));
+            current_statement_begin__ = 68;
             lp_accum__.add(ozab_lpmf<propto__>(y, inv_logit(multiply(Xp, theta_beta)), multiply(phi, inv_logit(multiply(Xa, mu_beta))), multiply(phi, subtract(1, inv_logit(multiply(Xa, mu_beta)))), c, pstream__));
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());

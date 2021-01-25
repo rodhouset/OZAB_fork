@@ -33,7 +33,7 @@ static int current_statement_begin__;
 stan::io::program_reader prog_reader__() {
     stan::io::program_reader reader;
     reader.add_event(0, 0, "start", "model_OZAB_model_probit");
-    reader.add_event(67, 65, "end", "model_OZAB_model_probit");
+    reader.add_event(69, 67, "end", "model_OZAB_model_probit");
     return reader;
 }
 template <typename T0__, typename T1__, typename T2__>
@@ -175,6 +175,8 @@ private:
         int Ka;
         matrix_d Xa;
         matrix_d Xp;
+        double prior_mean;
+        double prior_var;
 public:
     model_OZAB_model_probit(stan::io::var_context& context__,
         std::ostream* pstream__ = 0)
@@ -287,19 +289,32 @@ public:
                     Xp(j_1__, j_2__) = vals_r__[pos__++];
                 }
             }
+            current_statement_begin__ = 45;
+            context__.validate_dims("data initialization", "prior_mean", "double", context__.to_vec());
+            prior_mean = double(0);
+            vals_r__ = context__.vals_r("prior_mean");
+            pos__ = 0;
+            prior_mean = vals_r__[pos__++];
+            current_statement_begin__ = 46;
+            context__.validate_dims("data initialization", "prior_var", "double", context__.to_vec());
+            prior_var = double(0);
+            vals_r__ = context__.vals_r("prior_var");
+            pos__ = 0;
+            prior_var = vals_r__[pos__++];
+            check_greater_or_equal(function__, "prior_var", prior_var, 0);
             // initialize transformed data variables
             // execute transformed data statements
             // validate transformed data
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 48;
+            current_statement_begin__ = 50;
             validate_non_negative_index("mu_beta", "Ka", Ka);
             num_params_r__ += Ka;
-            current_statement_begin__ = 49;
+            current_statement_begin__ = 51;
             validate_non_negative_index("theta_beta", "Kp", Kp);
             num_params_r__ += Kp;
-            current_statement_begin__ = 50;
+            current_statement_begin__ = 52;
             num_params_r__ += 1;
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -318,7 +333,7 @@ public:
         (void) pos__; // dummy call to supress warning
         std::vector<double> vals_r__;
         std::vector<int> vals_i__;
-        current_statement_begin__ = 48;
+        current_statement_begin__ = 50;
         if (!(context__.contains_r("mu_beta")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable mu_beta missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("mu_beta");
@@ -335,7 +350,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable mu_beta: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 49;
+        current_statement_begin__ = 51;
         if (!(context__.contains_r("theta_beta")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable theta_beta missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("theta_beta");
@@ -352,7 +367,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable theta_beta: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 50;
+        current_statement_begin__ = 52;
         if (!(context__.contains_r("phi")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable phi missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("phi");
@@ -390,21 +405,21 @@ public:
         try {
             stan::io::reader<local_scalar_t__> in__(params_r__, params_i__);
             // model parameters
-            current_statement_begin__ = 48;
+            current_statement_begin__ = 50;
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> mu_beta;
             (void) mu_beta;  // dummy to suppress unused var warning
             if (jacobian__)
                 mu_beta = in__.vector_constrain(Ka, lp__);
             else
                 mu_beta = in__.vector_constrain(Ka);
-            current_statement_begin__ = 49;
+            current_statement_begin__ = 51;
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> theta_beta;
             (void) theta_beta;  // dummy to suppress unused var warning
             if (jacobian__)
                 theta_beta = in__.vector_constrain(Kp, lp__);
             else
                 theta_beta = in__.vector_constrain(Kp);
-            current_statement_begin__ = 50;
+            current_statement_begin__ = 52;
             local_scalar_t__ phi;
             (void) phi;  // dummy to suppress unused var warning
             if (jacobian__)
@@ -412,11 +427,11 @@ public:
             else
                 phi = in__.scalar_lb_constrain(0);
             // model body
-            current_statement_begin__ = 60;
-            lp_accum__.add(normal_log<propto__>(mu_beta, 0, 100));
-            current_statement_begin__ = 61;
-            lp_accum__.add(normal_log<propto__>(theta_beta, 0, 100));
-            current_statement_begin__ = 64;
+            current_statement_begin__ = 62;
+            lp_accum__.add(normal_log<propto__>(mu_beta, prior_mean, prior_var));
+            current_statement_begin__ = 63;
+            lp_accum__.add(normal_log<propto__>(theta_beta, prior_mean, prior_var));
+            current_statement_begin__ = 66;
             lp_accum__.add(ozab_lpmf<propto__>(y, Phi(multiply(Xp, theta_beta)), multiply(phi, Phi(multiply(Xa, mu_beta))), multiply(phi, subtract(1, Phi(multiply(Xa, mu_beta)))), c, pstream__));
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());

@@ -4,7 +4,14 @@
 \alias{ozab}
 \title{Fit OZAB Model}
 \usage{
-ozab(df, presence_formula, abundance_formula, cutpoint_scheme, ...)
+ozab(
+  df,
+  presence_formula,
+  abundance_formula,
+  cutpoint_scheme,
+  link_function = "logit",
+  ...
+)
 }
 \arguments{
 \item{df}{Tibble containing Species, Cover Class, and Covariates}
@@ -14,6 +21,8 @@ ozab(df, presence_formula, abundance_formula, cutpoint_scheme, ...)
 \item{abundance_formula}{Formula for Specifying Abundance}
 
 \item{cutpoint_scheme}{Vector of Cutpoint Scheme Used}
+
+\item{link_function}{Link Function to Use; Options are logit and probit; Defaults to logit}
 
 \item{...}{Additional Parameters to be Passed to Stan}
 }

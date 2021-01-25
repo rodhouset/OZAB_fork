@@ -42,6 +42,8 @@ data {
   int<lower=0> Ka; // Num. Cols of Abundance Design Matrix
   matrix[N, Ka] Xa; // Presence Design Matrix
   matrix[N, Kp] Xp; // Abundance Design Matrix
+  real prior_mean; //Prior Mean Value
+  real<lower=0> prior_var; //Prior Variance Value
 }
 
 parameters {
@@ -57,8 +59,8 @@ parameters {
 
 model {
   // Priors
-  mu_beta ~ normal(0, 100);
-  theta_beta ~ normal(0, 100);
+  mu_beta ~ normal(prior_mean, prior_var);
+  theta_beta ~ normal(prior_mean, prior_var);
 
   // Each species is multinomial on the backend
   y ~ ozab(Phi(Xp * theta_beta), phi * Phi(Xa * mu_beta), phi * (1 - Phi(Xa * mu_beta)), c);
