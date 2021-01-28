@@ -1,11 +1,9 @@
 ---
 title: "Introduction to the OZAB Package"
 output: 
-  rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{intro_to_ozab}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r, include = FALSE}

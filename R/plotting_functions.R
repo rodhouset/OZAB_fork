@@ -98,3 +98,19 @@ alluvial_plot <- function(.data, ..., alluvium_width = 1/12, stratum_width = 1/8
       ggplot2::geom_label(stat = ggalluvial::StatStratum, ggplot2::aes(label = ggplot2::after_stat(stratum))) +
       ggplot2::scale_x_discrete(limits = sapply(columns[1:non_null_args], rlang::quo_name), expand = c(.05, .05))
 }
+
+mosaic_plot <- function(df, x, fill, weight = NULL){
+  # Check if columns are found in the df
+
+  # Check if more than one covariate was provided
+
+  x <- rlang::enquo(x)
+  fill <- rlang::enquo(fill)
+
+  print(x)
+  print(fill)
+
+  df %>%
+    ggplot() +
+    ggmosaic::geom_mosaic(aes(x = ggmosaic::product(!! x), fill = !! fill))
+}
