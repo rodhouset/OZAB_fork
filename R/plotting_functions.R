@@ -90,13 +90,14 @@ alluvial_plot <- function(.data, ..., alluvium_width = 1/12, stratum_width = 1/8
   }
 
   .data %>%
+    dplyr::select(!!! columns) %>%
     dplyr::group_by(!!! columns) %>%
     dplyr::tally() %>%
     ggplot2::ggplot(ggplot2::aes(y = n, axis1 = !! columns[[1]], axis2 = !! columns[[2]], axis3 = !! columns[[3]], axis4 = !! columns[[4]] )) +
-      ggalluvial::geom_alluvium(ggplot2::aes(fill = !! columns[[1]]), width = alluvium_width) +
-      ggalluvial::geom_stratum(width = stratum_width) +
-      ggplot2::geom_label(stat = ggalluvial::StatStratum, ggplot2::aes(label = ggplot2::after_stat(stratum))) +
-      ggplot2::scale_x_discrete(limits = sapply(columns[1:non_null_args], rlang::quo_name), expand = c(.05, .05))
+    ggalluvial::geom_alluvium(ggplot2::aes(fill = !! columns[[1]]), width = alluvium_width) +
+    ggalluvial::geom_stratum(width = stratum_width) +
+    ggplot2::geom_label(stat = ggalluvial::StatStratum, ggplot2::aes(label = ggplot2::after_stat(stratum))) +
+    ggplot2::scale_x_discrete(limits = sapply(columns[1:non_null_args], rlang::quo_name), expand = c(.05, .05))
 }
 
 mosaic_plot <- function(df, x, fill, weight = NULL){
