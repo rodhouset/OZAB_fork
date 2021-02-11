@@ -1,4 +1,5 @@
 library(dplyr)
+library(tidyverse)
 
 sagebrush_raw <- readr::read_csv('data-raw/NPSDataFile_JABES_Irvineetal_OBHM.csv')
 
@@ -21,3 +22,50 @@ sagebrush <-
     )
 
 usethis::use_data(sagebrush, overwrite = TRUE)
+
+######################
+#Tom using to change data frame to Clarno dataset
+library(dplyr)
+
+sagebrush_raw <- readr::read_csv('data-raw/Merged_Clarno_WithBurnSeverity.csv')
+
+sagebrush_clarno <-
+  sagebrush_raw %>%
+  select(Bromus_tectorum, Pseudoroegneria_spicata, SCOSA, avgdef.centered,Year) %>%
+  rename(
+    `BROTEC` = Bromus_tectorum,
+    `PSESPI` = Pseudoroegneria_spicata,
+    `scosa` = SCOSA,
+    `deficit` = avgdef.centered
+  ) %>%
+  tidyr::pivot_longer(cols = c(`BROTEC`, `PSESPI`), names_to = 'Species', values_to = 'Cover Class') %>%
+  select(Species, `Cover Class`, `scosa`, `deficit`,`Year`) %>%
+  mutate(
+    `Cover Class` = fct_rev(as_factor(`Cover Class`))
+  )
+
+usethis::use_data(sagebrush_clarno, overwrite = TRUE)
+
+######################
+#Tom using to change data frame to Clarno dataset
+#This version doesn't use fct_rev
+library(dplyr)
+
+sagebrush_raw <- readr::read_csv('data-raw/Merged_Clarno_WithBurnSeverity.csv')
+
+sagebrush_clarno <-
+  sagebrush_raw %>%
+  select(Bromus_tectorum, Pseudoroegneria_spicata, SCOSA, avgdef.centered,Year) %>%
+  rename(
+    `BROTEC` = Bromus_tectorum,
+    `PSESPI` = Pseudoroegneria_spicata,
+    `scosa` = SCOSA,
+    `deficit` = avgdef.centered
+  ) %>%
+  tidyr::pivot_longer(cols = c(`BROTEC`, `PSESPI`), names_to = 'Species', values_to = 'Cover Class') %>%
+  select(Species, `Cover Class`, `scosa`, `deficit`,`Year`) %>%
+  mutate(
+    `Cover Class` = as_factor(`Cover Class`)
+  )
+
+usethis::use_data(sagebrush_clarno, overwrite = TRUE)
