@@ -6,20 +6,14 @@
 \usage{
 plot_cover_class_by_covariate(
   data,
-  species,
   covariate,
-  species_col = .data$Species,
   cover_class_col = .data$`Cover Class`
 )
 }
 \arguments{
 \item{data}{Dataframe in long format}
 
-\item{species}{Name of Species to plot}
-
 \item{covariate}{Name of Categorical Covariate to Plot By}
-
-\item{species_col}{Name of Species column if it differs from Default 'Species'}
 
 \item{cover_class_col}{Name of Cover Class column if it differs from Default 'Cover Class'}
 }
@@ -28,4 +22,7 @@ ggplot2 object
 }
 \description{
 First found in Irvine, Rodhouse, Keren 2016
+}
+\examples{
+  plot_cover_class_by_covariate(sagebrush, Fire)
 }

@@ -10,7 +10,11 @@ ozab(
   abundance_formula,
   cutpoint_scheme,
   link_function = "logit",
-  ...
+  ...,
+  prior_presence_mean = 0,
+  prior_abundance_mean = 0,
+  prior_presence_var = 10,
+  prior_abundance_var = 10
 )
 }
 \arguments{
@@ -25,10 +29,36 @@ ozab(
 \item{link_function}{Link Function to Use; Options are logit and probit; Defaults to logit}
 
 \item{...}{Additional Parameters to be Passed to Stan}
+
+\item{prior_presence_mean}{A vector of mean values for prior presence coefficients}
+
+\item{prior_abundance_mean}{A vector of mean values for prior abundance coefficients}
+
+\item{prior_presence_var}{A vector of variance values for prior presence coefficients}
+
+\item{prior_abundance_var}{A vector of variance values for prior abundance coefficients}
 }
 \value{
 Stan Object Fit
 }
 \description{
 Fit OZAB Model
+}
+\examples{
+\dontrun{
+  sagebrush2 <-
+sagebrush \%>\%
+ filter(Species == 'Artemisia tridentata') \%>\%
+ add_presence(cover_class_col = `Cover Class`) \%>\%
+ mutate(
+   `Dist. to Bound` = `Dist. to Bound` / 1000,
+   Topography2 = Topography^2
+ )
+ozab(
+ presence_formula = Presence ~ Topography + Fire + `Dist. to Bound`,
+ abundance_formula = `Cover Class` ~ Topography + Topography2 + Fire,
+ cutpoint_scheme = daubenmire(),
+ chains = 1
+)
+}
 }

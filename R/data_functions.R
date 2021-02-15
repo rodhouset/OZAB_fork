@@ -33,6 +33,8 @@ pivot_nps_data <- function(nps_data, covariate_cols = NULL){
 #' @export
 #'
 #' @examples
+#' sagebrush %>%
+#'   add_presence()
 #' @importFrom rlang .data
 add_presence <- function(df, cover_class_col = .data$`Cover Class`, absence_value = 0){
   df %>%

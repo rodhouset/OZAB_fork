@@ -19,3 +19,7 @@ Provided tibble with column of logicals indicating presence / absence appended
 \description{
 Add Presence Column
 }
+\examples{
+sagebrush \%>\%
+  add_presence()
+}

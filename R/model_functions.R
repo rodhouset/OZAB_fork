@@ -15,6 +15,22 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#'   sagebrush2 <-
+#' sagebrush %>%
+#'  filter(Species == 'Artemisia tridentata') %>%
+#'  add_presence(cover_class_col = `Cover Class`) %>%
+#'  mutate(
+#'    `Dist. to Bound` = `Dist. to Bound` / 1000,
+#'    Topography2 = Topography^2
+#'  )
+#' ozab(
+#'  presence_formula = Presence ~ Topography + Fire + `Dist. to Bound`,
+#'  abundance_formula = `Cover Class` ~ Topography + Topography2 + Fire,
+#'  cutpoint_scheme = daubenmire(),
+#'  chains = 1
+#' )
+#' }
 ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, link_function = 'logit', ..., prior_presence_mean = 0, prior_abundance_mean = 0, prior_presence_var = 10, prior_abundance_var = 10){
 
   ## Compose Data
