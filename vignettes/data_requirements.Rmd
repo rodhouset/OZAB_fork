@@ -1,3 +1,23 @@
+---
+title: "Data Requirements & Format"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data Requirements & Format}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(OZAB)
+```
+
 # OZAB Data Specifications
 
 Each of the models contained within this package assume that the data are presented in long format with each observational unit represented by a different row of the dataset. In other words, each row should represent the smallest unit of observation observed (a single species, a single location, within a single timepoint). All covariates associated with that observation should be included as part of the row. In an example below, we transform a wide table containing three species across 2 years of observation with associated covariates into a long format table capable of being used by OZAB package modeling functions.

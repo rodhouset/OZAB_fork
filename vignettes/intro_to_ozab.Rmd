@@ -4,7 +4,7 @@ output:
   rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{intro_to_ozab}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -65,7 +65,13 @@ sagebrush %>%
 
 ### Mosaic Plots
 
-TBA
+Included in the OZAB package is a basic wrapper to `ggmosaic` functionality. Currently, `ggmosaic` does not support spaces in column names and requires an appropriate renaming step. The arguments for this function are `factor1`, `factor2`, and `fill` where Factor 1 is the Y-axis, Factor 2 is the X-axis, and fill appropriately colors each component. 
+
+```{r}
+sagebrush %>%
+  rename(CoverClass = `Cover Class`) %>%
+  mosaic_plot(Fire, Species, `CoverClass`)
+```
 
 ## Model Fitting
 

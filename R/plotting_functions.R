@@ -70,6 +70,19 @@ alluvial_plot <- function(.data, ..., alluvium_width = 1/12, stratum_width = 1/8
     ggplot2::scale_x_discrete(limits = sapply(columns[1:non_null_args], rlang::quo_name), expand = c(.05, .05))
 }
 
+#' Basic Mosaic Plots
+#'
+#' @param df Dataframe from which the mosaic plot will be constructed
+#' @param factor1 The first factor to be included in the mosaic plot
+#' @param factor2 The second factor to be included in the mosaic plot
+#' @param fill The factor to be used for the fill color for the mosaic plot
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' sagebrush %>%
+#'    mosaic_plot(Fire, )
 mosaic_plot <- function(df, factor1, factor2, fill){
   # Check if columns are found in the df
 
@@ -80,6 +93,6 @@ mosaic_plot <- function(df, factor1, factor2, fill){
   fill <- rlang::ensym(fill)
 
   df %>%
-    ggplot() +
-    ggmosaic::geom_mosaic(aes(x = product(!! factor1, !! factor2), fill = !! fill))
+    ggplot2::ggplot() +
+    ggmosaic::geom_mosaic(aes(x = ggmosaic::product(!! factor1, !! factor2), fill = !! fill))
 }
