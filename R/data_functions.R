@@ -63,18 +63,24 @@ compose_ozab_data <- function(df, presence_formula, abundance_formula, cutpoint_
     stop('Response columns of abundance and presence-absence cannot be identical')
   }
 
-  ## Make sure presence_column only has two levels
-  ## TODO
 
-  ## Data Composition
-  y <- as.numeric(df[[presence_response_col]]) * as.numeric(df[[abundance_response_col]])
-  N <- length(y)
-  presence_matrix <- as.matrix(modelr::model_matrix(df, presence_formula))
+  ## Data Composition - Common Components
+  N <- nrow(df)
+  y <- all.vars(abundance_formula)[1]
+  print(validate_cutpoint(cutpoint_scheme))
+  if(validate_cutpoint(cutpoint_scheme)) {
+    c <- cutpoint_scheme
+  }
+
+  K <- length(cutpoint_scheme) + 1
+
+  ## Data Composition - Presence
+  presence_matrix <- model.matrix(lme4::nobars(presence_formula), data = df)
   Kp <- ncol(presence_matrix)
-  abundance_matrix <- as.matrix(modelr::model_matrix(df, abundance_formula))
+
+  ## Data Composition - Abundance
+  abundance_matrix <- model.matrix(lme4::nobars(abundance_formula), data = df)
   Ka <- ncol(abundance_matrix)
-  c <- cutpoint_scheme
-  K <- length(c) + 1
 
   list(
     N = N,

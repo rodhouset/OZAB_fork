@@ -43,7 +43,7 @@ test_that("prior values work", {
       `Presence` ~ Topography + Fire + `Dist. to Bound`,
       `Cover Class` ~ Topography + Topography2 + Fire,
       cutpoint_scheme = daubenmire(),
-      iter = 0
+      iter = 1
       )
 
   ## Single Value Run

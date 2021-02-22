@@ -32,6 +32,8 @@ validate_cutpoint <- function(cutpoint_vector){
   if(!all(cutpoint_vector == cummax(cutpoint_vector))){
     stop("Cutpoint Vector Must Be Monotonically Increasing")
   }
+
+  return(TRUE);
 }
 
 #' Braun-Blanquet Cutpoint Scheme
