@@ -65,8 +65,7 @@ compose_ozab_data <- function(df, presence_formula, abundance_formula, cutpoint_
 
   ## Data Composition - Common Components
   N <- nrow(df)
-  y <- all.vars(abundance_formula)[1]
-  print(validate_cutpoint(cutpoint_scheme))
+  y <- df[all.vars(abundance_formula)[1]] %>% as.matrix() %>% as.numeric()
   if(validate_cutpoint(cutpoint_scheme)) {
     c <- cutpoint_scheme
   }
@@ -78,20 +77,20 @@ compose_ozab_data <- function(df, presence_formula, abundance_formula, cutpoint_
   Kp <- ncol(presence_matrix)
 
   ## Data Composition - Presence Random Effects
-  presence_bars <- findbars(presence_formula)
-  presence_random_matrix <- mkReTrms(presence_bars, presence_matrix)
-  Zp <- as.matrix(t(presence_random_matrix$Zt))
-  Qp <- ncol(Zp)
+  #presence_bars <- lme4::findbars(presence_formula)
+  #presence_random_matrix <- lme4::mkReTrms(presence_bars, presence_matrix)
+  #Zp <- as.matrix(t(presence_random_matrix$Zt))
+  #Qp <- ncol(Zp)
 
   ## Data Composition - Abundance
   abundance_matrix <- model.matrix(lme4::nobars(abundance_formula), data = df)
   Ka <- ncol(abundance_matrix)
 
   ## Data Composition - Abundance Random Effects
-  abundance_bars <- findbars(abundance_formula)
-  abundance_random_matrix <- mkReTrms(abundance_bars, abundane_matrix)
-  Za <- as.matrix(t(abundance_random_matrix$Zt))
-  Qa <- ncol(Za)
+  #abundance_bars <- lme4::findbars(abundance_formula)
+  #abundance_random_matrix <- lme4::mkReTrms(abundance_bars, abundane_matrix)
+  #Za <- as.matrix(t(abundance_random_matrix$Zt))
+  #Qa <- ncol(Za)
 
   list(
     N = N,
@@ -101,6 +100,6 @@ compose_ozab_data <- function(df, presence_formula, abundance_formula, cutpoint_
     Kp = Kp,
     Xp = presence_matrix,
     Ka = Ka,
-    Xa = abundance_matrix,
+    Xa = abundance_matrix
   )
 }

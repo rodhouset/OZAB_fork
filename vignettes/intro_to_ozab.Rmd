@@ -97,7 +97,7 @@ In order to fit the model, we use the `ozab` function and provide formulae for P
 bsage_result <-
   sagebrush2 %>%
   ozab(
-    presence_formula = Presence ~ Topography + Fire + `Dist. to Bound`,
+    presence_formula = Presence ~ Topography + Fire + I(`Dist. to Bound`^2),
     abundance_formula = `Cover Class` ~ Topography + Topography2 + Fire,
     cutpoint_scheme = daubenmire(),
     chains = 1
