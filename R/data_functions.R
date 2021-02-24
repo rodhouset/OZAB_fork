@@ -41,6 +41,26 @@ add_presence <- function(df, cover_class_col = .data$`Cover Class`, absence_valu
     dplyr::mutate(Presence = ifelse({{ cover_class_col }} == absence_value, FALSE, TRUE))
 }
 
+decompose_formula <- function(df, formula) {
+  # Compose Fixed Effects
+  fixed_effects_matrix <- model.matrix(lme4::nobars(formula), data = df)
+
+  random_effects_matrix = NULL
+  # Check and compose if there are random effects
+  if (length(lme4::findbars(formula)) > 0) {
+    random_effects_matrix <- lme4::mkReTrms(lme4::findbars(formula), model.frame(lme4::subbars(formula), data = df))
+    random_effects_matrix <- t(as.matrix(random_effects_matrix$Zt))
+    rownames(random_effects_matrix) <- colnames(random_effects_matrix) <- NULL
+  }
+
+  list(
+    fixed_effects_matrix = fixed_effects_matrix,
+    num_fixed_params = ncol(fixed_effects_matrix),
+    random_effects_matrix = random_effects_matrix,
+    num_random_params = ncol(random_effects_matrix)
+  )
+}
+
 compose_ozab_data <- function(df, presence_formula, abundance_formula, cutpoint_scheme){
 
   ## Check if response of presence_formula is in dataframe

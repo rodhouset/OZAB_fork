@@ -112,3 +112,92 @@ test_that('Data Composition Works', {
     )
   })
 })
+
+test_that('Formula Decomposition - No Random Effects', {
+  test_tibble <-
+    dplyr::tibble(
+      y = c(1, 2, 3, 4),
+      x1 = c(0.5, 2.5, 1, 1.5),
+      x2 = c(0.2, 1.5, 3, 4),
+      group = c(1, 1, 2, 2)
+    )
+
+  ## List Type
+  expect_type(decompose_formula(test_tibble, y ~ x1 + x2), 'list')
+
+  ## Null Random Effects
+  expect_equal(decompose_formula(test_tibble, y ~ x1 + x2)$random_effects_matrix, NULL)
+  expect_equal(decompose_formula(test_tibble, y ~ x1 + x2)$num_random_params, NULL)
+
+  ## Fixed Effects
+  expect_equal(matrix(decompose_formula(test_tibble, y ~ x1 + x2)$fixed_effects_matrix, ncol = 3),
+               matrix(c(1, 1, 1, 1, 0.5, 2.5, 1, 1.5, 0.2, 1.5, 3, 4), ncol = 3))
+  expect_equal(decompose_formula(test_tibble, y ~ x1 + x2)$num_fixed_params, 3)
+})
+
+test_that('Formula Decomposition - Random Effects', {
+  test_tibble <-
+    dplyr::tibble(
+      y = c(1, 2, 3, 4),
+      x1 = c(0.5, 2.5, 1, 1.5),
+      x2 = c(0.2, 1.5, 3, 4),
+      group = forcats::as_factor(c(1, 1, 2, 2))
+    )
+
+  ## List Type
+  expect_type(decompose_formula(test_tibble, y ~ x1 + x2), 'list')
+
+  ## Random Effects Matrix
+  expect_equal(matrix(decompose_formula(test_tibble, y ~ x1 + (x2 | group))$random_effects_matrix, ncol = 4),
+               matrix(c(1, 1, 0, 0, 0.2, 1.5, 0, 0, 0, 0, 1, 1, 0, 0, 3, 4), ncol = 4))
+  expect_equal(decompose_formula(test_tibble, y ~ x1 + (x2 | group))$num_random_params, 4)
+
+  ## Fixed Effects
+  expect_equal(matrix(decompose_formula(test_tibble, y ~ x1 + (x2 | group))$fixed_effects_matrix, ncol = 2),
+               matrix(c(1, 1, 1, 1, 0.5, 2.5, 1, 1.5), ncol = 2))
+  expect_equal(decompose_formula(test_tibble, y ~ x1 + (x2 | group))$num_fixed_params, 2)
+})
+
+test_that('Formula Decomposition - No Intercepts', {
+
+test_tibble <-
+  dplyr::tibble(
+    y = c(1, 2, 3, 4),
+    x1 = c(0.5, 2.5, 1, 1.5),
+    x2 = c(0.2, 1.5, 3, 4),
+    group = forcats::as_factor(c(1, 1, 2, 2))
+  )
+
+  ## List Type
+  expect_type(decompose_formula(test_tibble, y ~ x1 + x2), 'list')
+
+  ## Random Effects Matrix
+  expect_equal(matrix(decompose_formula(test_tibble, y ~ -1 + x1 + (-1 + x2 | group))$random_effects_matrix, ncol = 2),
+               matrix(c(0.2, 1.5, 0, 0, 0, 0, 3, 4), ncol = 2))
+  expect_equal(decompose_formula(test_tibble, y ~ -1 + x1 + (-1 + x2 | group))$num_random_params, 2)
+
+  ## Fixed Effects
+  expect_equal(matrix(decompose_formula(test_tibble, y ~ -1 + x1 + (-1 + x2 | group))$fixed_effects_matrix, ncol = 1),
+               matrix(c(0.5, 2.5, 1, 1.5), ncol = 1))
+  expect_equal(decompose_formula(test_tibble, y ~ -1 + x1 + (-1 + x2 | group))$num_fixed_params, 1)
+})
+
+test_that('Formula Decomposition - Power Transformations', {
+    test_tibble <-
+      dplyr::tibble(
+        y = c(1, 2, 3, 4),
+        x1 = c(0.5, 2.5, 1, 1.5),
+        x2 = c(0.2, 1.5, 3, 4),
+        group = c(1, 1, 2, 2)
+      )
+
+    formula_result <- decompose_formula(test_tibble, y ~ x1 + I(x1^2))
+
+    ## List Type
+    expect_type(formula_result, 'list')
+
+    ## Fixed Effects
+    expect_equal(matrix(formula_result$fixed_effects_matrix, ncol = 3),
+                 matrix(c(1, 1, 1, 1, 0.5, 2.5, 1, 1.5, 0.5^2, 2.5^2, 1^2, 1.5^2), ncol = 3))
+    expect_equal(formula_result$num_fixed_params, 3)
+})
