@@ -95,13 +95,15 @@ ozab <- function(df, presence_formula, abundance_formula, cutpoint_scheme, link_
 
   result@sim$fnames_oi[(data$Kp + 1):(data$Kp + data$Ka)] <- abundance_names
 
-  prior_information <-
-    list(
-      prior_presence_mean = data$prior_presence_mean,
-      prior_abundance_mean = data$prior_abundance_mean,
-      prior_presence_var = data$prior_presence_var,
-      prior_abundance_var = data$prior_abundance_var
-    )
+  prior_information <- list()
+
+  for (i in 1:length(presence_names)) {
+    prior_information[[presence_names[i]]] <- c(data$prior_presence_mean[i], data$prior_presence_var[i])
+  }
+
+  for (i in 1:length(abundance_names)) {
+    prior_information[[abundance_names[i]]] <- c(data$prior_abundance_mean[i], data$prior_abundance_var[i])
+  }
 
   attr(result, 'prior') <- prior_information
 

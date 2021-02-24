@@ -96,3 +96,38 @@ mosaic_plot <- function(df, factor1, factor2, fill){
     ggplot2::ggplot() +
     ggmosaic::geom_mosaic(aes(x = ggmosaic::product(!! factor1, !! factor2), fill = !! fill))
 }
+
+plot_prior_sensitivity <- function(OZABfit, pattern){
+
+  # Extract Selected Posteriors
+  param_names <- names(bsage_result)[grepl(pattern, names(OZABfit))]
+  print(names(bsage_result))
+  posteriors <-
+    rstan::extract(OZABfit, param_names) %>%
+    as.tibble() %>%
+    tidyr::pivot_longer(everything(), names_to = 'parameter', values_to = 'value')
+
+  print(param_names)
+
+  limits <-
+    posteriors %>%
+    summarise(min = min(value), max = max(value))
+
+  x <- seq(from = limits[['min']],
+           to = limits[['max']],
+           length.out = nrow(posteriors))
+
+  priors <- NULL
+
+  # Compute Prior Densities
+  for(param_name in param_names) {
+    priors <- rbind(priors, tibble(parameter = param_name, x = x, y = dnorm(x, mean = OZABfit@prior[[param_name]][1], sd = OZABfit@prior[[param_name]][2])))
+  }
+
+  # Plot Posteriors
+  posteriors %>%
+  ggplot2::ggplot(aes(x = value)) +
+    ggplot2::geom_histogram(aes(y = stat(density))) +
+    ggplot2::facet_wrap(~parameter) +
+    ggplot2::geom_line(aes(x = x, y = y), data=filter(priors, parameter == parameter))
+}
