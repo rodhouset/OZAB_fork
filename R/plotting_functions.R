@@ -3,55 +3,25 @@
 #' First found in Irvine, Rodhouse, Keren 2016
 #'
 #' @param data Dataframe in long format
-#' @param species Name of Species to plot
 #' @param covariate Name of Categorical Covariate to Plot By
-#' @param species_col Name of Species column if it differs from Default 'Species'
 #' @param cover_class_col Name of Cover Class column if it differs from Default 'Cover Class'
 #'
 #' @return ggplot2 object
 #' @export
 #'
 #' @examples
+#'   plot_cover_class_by_covariate(sagebrush, Fire)
 #' @importFrom rlang .data
-plot_cover_class_by_covariate <- function(data, species, covariate, species_col = .data$Species, cover_class_col = .data$`Cover Class`){
+plot_cover_class_by_covariate <- function(data, covariate, cover_class_col = .data$`Cover Class`){
 
-  if(nrow(dplyr::filter(data, {{ species_col }} == species)) == 0){
-    stop('Species Not Found')
-  }
+  # if(nrow(dplyr::filter(data, {{ species_col }} == species)) == 0){
+  #   stop('Species Not Found')
+  # }
 
   data %>%
-    dplyr::filter({{ species_col }} == species) %>%
     ggplot2::ggplot(ggplot2::aes(x = {{ covariate }}, fill = {{ cover_class_col }})) +
       ggplot2::geom_bar(position = ggplot2::position_fill()) +
       ggplot2::ylab("Empirical Cumulative Proportions")
-}
-
-#' Plot Cover class over space and time
-#'
-#' First found in Ito 2020
-#'
-#' @param data Dataframe in long format
-#' @param species Name of Species to Plot
-#' @param location_col Name of Location Column (Default: Location)
-#' @param datetime_col Name of Datetime Column (Default: Datetime)
-#' @param species_col Name of Species Column (Default: Species)
-#' @param cover_class_col Name of Cover Class Column (Default: Cover Class)
-#'
-#' @return ggplot2 object
-#' @export
-#'
-#' @examples
-#' @importFrom rlang .data
-plot_cover_class_by_time_and_location <- function(data, species, datetime_col, location_col, species_col = .data$Species, cover_class_col = .data$`Cover Class`){
-
-  if(nrow(dplyr::filter(data, {{ species_col }} == species)) == 0){
-    stop('Species not found')
-  }
-
-  data %>%
-    dplyr::filter({{ species_col }} == species) %>%
-    ggplot2::ggplot(ggplot2::aes(x = {{ datetime_col }}, y = {{ location_col }}, fill = {{ cover_class_col }})) +
-    ggplot2::geom_tile()
 }
 
 #' Basic Alluvial Plots for Long Format Dataframes
@@ -100,6 +70,19 @@ alluvial_plot <- function(.data, ..., alluvium_width = 1/12, stratum_width = 1/8
     ggplot2::scale_x_discrete(limits = sapply(columns[1:non_null_args], rlang::quo_name), expand = c(.05, .05))
 }
 
+#' Basic Mosaic Plots
+#'
+#' @param df Dataframe from which the mosaic plot will be constructed
+#' @param factor1 The first factor to be included in the mosaic plot
+#' @param factor2 The second factor to be included in the mosaic plot
+#' @param fill The factor to be used for the fill color for the mosaic plot
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' sagebrush %>%
+#'    mosaic_plot(Fire, )
 mosaic_plot <- function(df, factor1, factor2, fill){
   # Check if columns are found in the df
 
@@ -110,6 +93,41 @@ mosaic_plot <- function(df, factor1, factor2, fill){
   fill <- rlang::ensym(fill)
 
   df %>%
-    ggplot() +
-    ggmosaic::geom_mosaic(aes(x = product(!! factor1, !! factor2), fill = !! fill))
+    ggplot2::ggplot() +
+    ggmosaic::geom_mosaic(aes(x = ggmosaic::product(!! factor1, !! factor2), fill = !! fill))
+}
+
+plot_prior_sensitivity <- function(OZABfit, pattern){
+
+  # Extract Selected Posteriors
+  param_names <- names(bsage_result)[grepl(pattern, names(OZABfit))]
+  print(names(bsage_result))
+  posteriors <-
+    rstan::extract(OZABfit, param_names) %>%
+    as.tibble() %>%
+    tidyr::pivot_longer(everything(), names_to = 'parameter', values_to = 'value')
+
+  print(param_names)
+
+  limits <-
+    posteriors %>%
+    summarise(min = min(value), max = max(value))
+
+  x <- seq(from = limits[['min']],
+           to = limits[['max']],
+           length.out = nrow(posteriors))
+
+  priors <- NULL
+
+  # Compute Prior Densities
+  for(param_name in param_names) {
+    priors <- rbind(priors, tibble(parameter = param_name, x = x, y = dnorm(x, mean = OZABfit@prior[[param_name]][1], sd = OZABfit@prior[[param_name]][2])))
+  }
+
+  # Plot Posteriors
+  posteriors %>%
+  ggplot2::ggplot(aes(x = value)) +
+    ggplot2::geom_histogram(aes(y = stat(density))) +
+    ggplot2::facet_wrap(~parameter) +
+    ggplot2::geom_line(aes(x = x, y = y), data=filter(priors, parameter == parameter))
 }
